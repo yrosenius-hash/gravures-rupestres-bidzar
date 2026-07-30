@@ -1,0 +1,361 @@
+/* ============================================================
+   CONUVAGRUB — Conservation numérique des gravures de Bidzar
+   Système de design : ancré dans la matière du sujet.
+   La pierre (basalte), la terre (latérite), le pigment (ocre),
+   et le principe même de la méthode RTI : la lumière rasante
+   qui révèle un relief invisible sous un éclairage plat.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --basalte: #2B2724;   /* fond sombre — la pierre gravée */
+  --craie: #EDE4D3;     /* texte clair — la poussière de craie dans les sillons */
+  --laterite: #A6462C;  /* accent primaire — la terre rouge du Nord-Cameroun */
+  --ocre: #C08A34;      /* accent secondaire — le pigment */
+  --ardoise: #6B655D;   /* gris — texte secondaire, bordures */
+  --encre: #1E1B18;     /* texte sombre sur fond clair */
+
+  --font-display: 'Spectral', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --max-width: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--craie);
+  color: var(--encre);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+a { color: inherit; }
+
+/* ---------- En-tête / navigation ---------- */
+
+.site-header {
+  background: var(--basalte);
+  color: var(--craie);
+  padding: 1.1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid rgba(237, 228, 211, 0.12);
+}
+
+.site-header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-mark {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--craie);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.site-mark span {
+  color: var(--ocre);
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--craie);
+  opacity: 0.72;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  opacity: 1;
+  border-bottom-color: var(--ocre);
+}
+
+.site-nav a:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--ocre);
+  outline-offset: 3px;
+}
+
+/* ---------- Panneau "dalle" — le signature element ----------
+   Un rectangle sombre traversé d'un balayage de lumière diagonal.
+   Sur survol / apparition, la lumière glisse et fait apparaître
+   des sillons gravés (traits fins) — écho direct de la méthode RTI
+   du mémoire : un relief qui n'existe que sous lumière rasante. */
+
+.dalle {
+  position: relative;
+  background: var(--basalte);
+  color: var(--craie);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.dalle::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(192, 138, 52, 0.16) 45%,
+    rgba(237, 228, 211, 0.22) 50%,
+    rgba(192, 138, 52, 0.16) 55%,
+    transparent 70%
+  );
+  transform: translateX(-60%);
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dalle:hover::before,
+.dalle.dalle--auto::before {
+  transform: translateX(60%);
+}
+
+.dalle::after {
+  /* sillons gravés : fines lignes qui n'apparaissent nettement
+     qu'à la faveur du balayage de lumière ci-dessus */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    100deg,
+    transparent 0,
+    transparent 18px,
+    rgba(237, 228, 211, 0.05) 19px,
+    transparent 20px
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dalle > * { position: relative; z-index: 2; }
+
+/* ---------- Structure générale ---------- */
+
+main { display: block; }
+
+.section {
+  padding: 4.5rem 1.5rem;
+}
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--laterite);
+  margin: 0 0 0.9rem;
+}
+
+.dalle .eyebrow { color: var(--ocre); }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 600; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+h3 { font-size: 1.2rem; font-style: italic; font-weight: 500; }
+
+p { max-width: 62ch; }
+
+.lede {
+  font-size: 1.15rem;
+  color: var(--ardoise);
+  max-width: 58ch;
+}
+
+.dalle .lede { color: rgba(237, 228, 211, 0.78); }
+
+.meta-line {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ardoise);
+  letter-spacing: 0.03em;
+}
+
+.dalle .meta-line { color: rgba(237, 228, 211, 0.6); }
+
+/* ---------- Grilles de cartes ---------- */
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+.card {
+  border: 1px solid rgba(43, 39, 36, 0.14);
+  padding: 1.6rem;
+  background: rgba(43, 39, 36, 0.02);
+}
+
+.card .eyebrow { font-size: 0.7rem; }
+
+/* ---------- Étapes numérotées (justifiées uniquement là où
+   la méthode est réellement séquentielle — page méthodologie) ---------- */
+
+.etapes {
+  counter-reset: etape;
+  display: grid;
+  gap: 0;
+  margin-top: 2.5rem;
+  border-top: 1px solid rgba(43, 39, 36, 0.14);
+}
+
+.etape {
+  counter-increment: etape;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.5rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid rgba(43, 39, 36, 0.14);
+}
+
+.etape::before {
+  content: counter(etape, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--laterite);
+}
+
+/* ---------- Bouton / lien d'action ---------- */
+
+.bouton {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.8rem 1.4rem;
+  border: 1px solid currentColor;
+  color: var(--craie);
+  background: var(--laterite);
+  border-color: var(--laterite);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.bouton:hover {
+  background: transparent;
+  color: var(--laterite);
+}
+
+.dalle .bouton {
+  background: var(--ocre);
+  border-color: var(--ocre);
+  color: var(--basalte);
+}
+
+.dalle .bouton:hover {
+  background: transparent;
+  color: var(--craie);
+  border-color: var(--craie);
+}
+
+/* ---------- Placeholders de médias (à remplacer) ---------- */
+
+.media-slot {
+  aspect-ratio: 4 / 3;
+  border: 1px dashed var(--ardoise);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ardoise);
+  text-align: center;
+  padding: 1rem;
+  background: rgba(107, 101, 93, 0.05);
+}
+
+.media-slot--large { aspect-ratio: 16 / 9; }
+
+/* ---------- Pied de page ---------- */
+
+.site-footer {
+  background: var(--basalte);
+  color: rgba(237, 228, 211, 0.55);
+  padding: 2.5rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+.site-footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* ---------- Formulaires (page contact) ---------- */
+
+.form-embed {
+  border: 1px solid rgba(43, 39, 36, 0.14);
+  padding: 1rem;
+  background: rgba(43, 39, 36, 0.02);
+}
+
+.form-embed iframe {
+  width: 100%;
+  min-height: 520px;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .section { padding: 3rem 1.2rem; }
+  .etape { grid-template-columns: 3rem 1fr; }
+}
