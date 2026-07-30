@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Musée virtuel — CONUVAGRUB</title>
 <link rel="stylesheet" href="style.css">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
 
@@ -33,12 +34,19 @@
   <section class="section">
     <div class="section-inner">
       <p class="eyebrow">Modèles 3D — photogrammétrie</p>
-      <h2>Galerie Sketchfab</h2>
-      <p>Emplacement prévu pour les embeds Sketchfab (iframe), un par dalle documentée.</p>
+      <h2>Dix dalles, capturées et rognées</h2>
+      <p>Modèles générés avec KIRI Engine (photogrammétrie mobile). Faites glisser pour tourner autour de chaque dalle, pincez pour zoomer.</p>
       <div class="grid grid--3">
-        <div class="media-slot">Embed Sketchfab<br>Dalle n°1</div>
-        <div class="media-slot">Embed Sketchfab<br>Dalle n°2</div>
-        <div class="media-slot">Embed Sketchfab<br>Dalle n°3</div>
+        <model-viewer class="modele-3d" src="dalle-01.glb" alt="Dalle gravée n°01, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°01</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-02.glb" alt="Dalle gravée n°02, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°02</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-03.glb" alt="Dalle gravée n°03, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°03</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-04.glb" alt="Dalle gravée n°04, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°04</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-05.glb" alt="Dalle gravée n°05, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°05</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-06.glb" alt="Dalle gravée n°06, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°06</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-07.glb" alt="Dalle gravée n°07, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°07</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-08.glb" alt="Dalle gravée n°08, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°08</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-09.glb" alt="Dalle gravée n°09, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°09</div></model-viewer>
+        <model-viewer class="modele-3d" src="dalle-10.glb" alt="Dalle gravée n°10, Bidzar" camera-controls auto-rotate shadow-intensity="1"><div class="modele-3d-label">Dalle n°10</div></model-viewer>
       </div>
     </div>
   </section>
@@ -49,8 +57,16 @@
       <h2>Visualiseurs RTI interactifs</h2>
       <p>Emplacement prévu pour les fichiers RTI (via RelightLab ou visualiseur web équivalent) permettant de faire pivoter la direction de la lumière.</p>
       <div class="grid grid--2">
-        <div class="media-slot media-slot--large">Visualiseur RTI<br>Dalle n°1</div>
-        <div class="media-slot media-slot--large">Visualiseur RTI<br>Dalle n°2</div>
+        <div class="media-slot media-slot--large" id="rti-01">Visualiseur RTI<br>Dalle n°01</div>
+        <div class="media-slot media-slot--large" id="rti-02">Visualiseur RTI<br>Dalle n°02</div>
+        <div class="media-slot media-slot--large" id="rti-03">Visualiseur RTI<br>Dalle n°03</div>
+        <div class="media-slot media-slot--large" id="rti-04">Visualiseur RTI<br>Dalle n°04</div>
+        <div class="media-slot media-slot--large" id="rti-05">Visualiseur RTI<br>Dalle n°05</div>
+        <div class="media-slot media-slot--large" id="rti-06">Visualiseur RTI<br>Dalle n°06</div>
+        <div class="media-slot media-slot--large" id="rti-07">Visualiseur RTI<br>Dalle n°07</div>
+        <div class="media-slot media-slot--large" id="rti-08">Visualiseur RTI<br>Dalle n°08</div>
+        <div class="media-slot media-slot--large" id="rti-09">Visualiseur RTI<br>Dalle n°09</div>
+        <div class="media-slot media-slot--large" id="rti-10">Visualiseur RTI<br>Dalle n°10</div>
       </div>
     </div>
   </section>
