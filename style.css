@@ -242,6 +242,29 @@ p { max-width: 62ch; }
 
 .card .eyebrow { font-size: 0.7rem; }
 
+.card--lien {
+  display: block;
+  text-decoration: none;
+  color: var(--encre);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  padding: 1.3rem 1.4rem;
+  border: 1px solid rgba(43, 39, 36, 0.14);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.card--lien:hover {
+  border-color: var(--laterite);
+  background: rgba(166, 70, 44, 0.04);
+}
+
+.card--lien .meta-line {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--laterite);
+}
+
 /* ---------- Étapes numérotées (justifiées uniquement là où
    la méthode est réellement séquentielle — page méthodologie) ---------- */
 
