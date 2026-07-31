@@ -265,6 +265,48 @@ p { max-width: 62ch; }
   color: var(--laterite);
 }
 
+.card--galerie {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  text-decoration: none;
+  border: 1px solid rgba(43, 39, 36, 0.14);
+  background: rgba(107, 101, 93, 0.06);
+}
+
+.card--galerie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.card--galerie:hover img {
+  transform: scale(1.04);
+}
+
+.card--galerie-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.6rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--craie);
+  background: linear-gradient(to top, rgba(43, 39, 36, 0.82), rgba(43, 39, 36, 0));
+}
+
+.card--galerie-label .meta-line {
+  display: block;
+  margin-top: 0.15rem;
+  color: rgba(237, 228, 211, 0.7);
+  font-size: 0.7rem;
+}
+
 /* ---------- Étapes numérotées (justifiées uniquement là où
    la méthode est réellement séquentielle — page méthodologie) ---------- */
 
