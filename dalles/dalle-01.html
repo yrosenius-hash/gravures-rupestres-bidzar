@@ -68,12 +68,10 @@
             }
             container.textContent = '';
             const viewer = new OpenLIME.Viewer('#rti-01', { layout: 'basic' });
-            const rtiLayer = new OpenLIME.LayerRTI({
-              id: 'rti-layer-01',
-              layout: 'image',
-              url: '../rti/dalle-01/info.json'
+            const rtiLayer = viewer.addLayer('rti', {
+              url: '../rti/dalle-01/info.json',
+              layout: 'image'
             });
-            viewer.addLayer(rtiLayer);
             rtiLayer.addEvent('ready', function() {
               viewer.camera.fitCameraBox(viewer.camera.boundingBox());
             });
