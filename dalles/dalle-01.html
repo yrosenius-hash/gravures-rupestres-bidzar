@@ -54,42 +54,37 @@
   </section>
 
   <section class="section dalle">
-    <div class="section-inner">
-      <p class="eyebrow">Imagerie RTI</p>
-      <div id="rti-01" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2); color:#EDE4D3; font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;">Chargement du visualiseur RTI…</div>
-      <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
-      <script src="https://unpkg.com/openlime@1.2.6/dist/js/openlime.min.js"></script>
-      <script>
-        window.addEventListener("load", () => {
-
-            const container = document.getElementById("rti-01");
-            container.innerHTML = "";
-
-            try {
-
-                const viewer = new OpenLIME.Viewer("rti-01");
-
-                const rtiLayer = new OpenLIME.Layer({
-                    type: "rti",
-                    url: "../rti/dalle-01/info.json",
-                    layout: "image"
-                });
-
-                viewer.addLayer("rti", rtiLayer);
-
-                new OpenLIME.UIBasic(viewer);
-
-            } catch (e) {
-
-                container.innerHTML = e.message;
-                console.error(e);
-
-            }
-
-        });
-      </script>
+  <div class="section-inner">
+    <p class="eyebrow">Imagerie RTI</p>
+    <div id="rti-01" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2); color:#EDE4D3; font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;">
+      Chargement du visualiseur RTI…
     </div>
-  </section>
+    <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
+
+    <script src="https://unpkg.com/openlime@1.2.6/dist/js/openlime.min.js"></script>
+    <script>
+      window.addEventListener("load", async () => {
+        const container = document.getElementById("rti-01");
+        container.innerHTML = "";
+
+        try {
+          const viewer = new OpenLIME.Viewer("rti-01");
+          const layer = new OpenLIME.LayerRTI({
+            id: "rti",
+            url: "../rti/dalle-01/",
+            layout: "image"
+          });
+
+          viewer.addLayer(layer);
+          new OpenLIME.UIBasic(viewer);
+        } catch (e) {
+          container.innerHTML = "Erreur RTI : " + e.message;
+          console.error(e);
+        }
+      });
+    </script>
+  </div>
+</section>
 
 </main>
 
