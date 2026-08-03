@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dalle n°01 — CONUVAGRUB</title>
 <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://unpkg.com/openlime@1.2.1/dist/css/skin.css">
+<link rel="stylesheet" href="https://unpkg.com/openlime@1.2.1/dist/css/light.css">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
@@ -54,18 +56,33 @@
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
-      <div id="rti-01" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2);"></div>
+      <div id="rti-01" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2); color:#EDE4D3; font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;">Chargement du visualiseur RTI…</div>
       <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
-      <script src="https://unpkg.com/openlime@1.2.6/dist/js/openlime.min.js"></script>
+      <script src="https://unpkg.com/openlime@1.2.1/dist/js/openlime.min.js"></script>
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const viewer = new OpenLIME.Viewer('#rti-01', { layout: 'basic' });
-          const rtiLayer = new OpenLIME.LayerRTI({ id: 'rti-layer-01', url: '../rti/dalle-01/info.json' });
-          viewer.addLayer(rtiLayer);
-          rtiLayer.addEvent('ready', () => {
-            viewer.camera.fitCameraBox(viewer.camera.boundingBox());
-          });
-          const ui = new OpenLIME.UIBasic(viewer);
+        window.addEventListener('load', function() {
+          const container = document.getElementById('rti-01');
+          try {
+            if (typeof OpenLIME === 'undefined') {
+              throw new Error('La bibliothèque OpenLIME ne s\'est pas chargée (CDN indisponible).');
+            }
+            container.textContent = '';
+            const viewer = new OpenLIME.Viewer('#rti-01', { layout: 'basic' });
+            const rtiLayer = new OpenLIME.LayerRTI({
+              id: 'rti-layer-01',
+              layout: 'image',
+              url: '../rti/dalle-01/info.json'
+            });
+            viewer.addLayer(rtiLayer);
+            rtiLayer.addEvent('ready', function() {
+              viewer.camera.fitCameraBox(viewer.camera.boundingBox());
+            });
+            new OpenLIME.UIBasic(viewer);
+          } catch (err) {
+            container.style.display = 'block';
+            container.textContent = 'Erreur RTI : ' + err.message;
+            console.error('Erreur OpenLIME complète :', err);
+          }
         });
       </script>
     </div>
