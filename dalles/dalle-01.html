@@ -54,7 +54,14 @@
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
-      <div class="media-slot media-slot--large" style="border-color: rgba(237,228,211,0.4); color: rgba(237,228,211,0.65);">Visualiseur RTI — Dalle n°01<br><span class="meta-line">à intégrer</span></div>
+      <div id="rti-01" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2);"></div>
+      <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
+      <script type="module">
+        import { Viewer, UIBasic } from 'https://cdn.jsdelivr.net/npm/openlime/+esm';
+        const viewer = new Viewer('#rti-01');
+        viewer.addLayer('rti', { url: '../rti/dalle-01/info.json', layout: 'image' });
+        new UIBasic(viewer);
+      </script>
     </div>
   </section>
 
