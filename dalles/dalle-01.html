@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dalle n°01 — CONUVAGRUB</title>
 <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://unpkg.com/openlime@1.2.6/dist/css/lime.css">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
@@ -56,11 +57,14 @@
       <p class="eyebrow">Imagerie RTI</p>
       <div id="rti-01" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2);"></div>
       <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
-      <script type="module">
-        import { Viewer, UIBasic } from 'https://cdn.jsdelivr.net/npm/openlime/+esm';
-        const viewer = new Viewer('#rti-01');
-        viewer.addLayer('rti', { url: '../rti/dalle-01/info.json', layout: 'image' });
-        new UIBasic(viewer);
+      <script src="https://unpkg.com/openlime@1.2.6/dist/js/openlime.min.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const viewer = new OpenLIME.Viewer('rti-01', { layout: 'basic' });
+          const rtiLayer = new OpenLIME.LayerRTI({ id: 'rti-layer-01', layout: 'image', url: '../rti/dalle-01/info.json' });
+          viewer.addLayer(rtiLayer);
+          const ui = new OpenLIME.UIBasic(viewer);
+        });
       </script>
     </div>
   </section>
