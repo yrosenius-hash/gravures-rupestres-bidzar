@@ -60,26 +60,16 @@
       <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
       <script src="https://unpkg.com/openlime@1.2.6/dist/js/openlime.min.js"></script>
       <script>
-        window.addEventListener('load', function() {
-          const container = document.getElementById('rti-01');
-          try {
-            if (typeof OpenLIME === 'undefined') {
-              throw new Error('La bibliothèque OpenLIME ne s\'est pas chargée (CDN indisponible).');
-            }
-            container.textContent = '';
-            const viewer = new OpenLIME.Viewer('#rti-01', { layout: 'basic' });
-            viewer.addLayer('rti', {
-              url: '../rti/dalle-01/info.json',
-              layout: 'image'
-            });
-            new OpenLIME.UIBasic(viewer);
-          } catch (err) {
-            container.style.display = 'block';
-            container.textContent = 'Erreur RTI : ' + err.message;
-            console.error('Erreur OpenLIME complète :', err);
-          }
-        });
-      </script>
+      <script>
+window.addEventListener("load", () => {
+
+    console.log(OpenLIME);
+
+    const container = document.getElementById("rti-01");
+    container.innerHTML = "OpenLIME chargé.";
+
+});
+</script>
     </div>
   </section>
 
