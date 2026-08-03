@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dalle n°01 — CONUVAGRUB</title>
 <link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="https://unpkg.com/openlime@1.2.6/dist/css/lime.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/lime.css">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
@@ -63,6 +63,9 @@
           const viewer = new OpenLIME.Viewer('rti-01', { layout: 'basic' });
           const rtiLayer = new OpenLIME.LayerRTI({ id: 'rti-layer-01', layout: 'image', url: '../rti/dalle-01/info.json' });
           viewer.addLayer(rtiLayer);
+          rtiLayer.addEvent('ready', () => {
+            viewer.camera.fitCameraBox(viewer.camera.boundingBox());
+          });
           const ui = new OpenLIME.UIBasic(viewer);
         });
       </script>
