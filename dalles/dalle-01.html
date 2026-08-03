@@ -68,12 +68,9 @@
             }
             container.textContent = '';
             const viewer = new OpenLIME.Viewer('#rti-01', { layout: 'basic' });
-            const rtiLayer = viewer.addLayer('rti', {
+            viewer.addLayer('rti', {
               url: '../rti/dalle-01/info.json',
               layout: 'image'
-            });
-            rtiLayer.addEvent('ready', function() {
-              viewer.camera.fitCameraBox(viewer.camera.boundingBox());
             });
             new OpenLIME.UIBasic(viewer);
           } catch (err) {
