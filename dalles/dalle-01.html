@@ -60,7 +60,7 @@
       <script>
         document.addEventListener('DOMContentLoaded', function() {
           const viewer = new OpenLIME.Viewer('#rti-01', { layout: 'basic' });
-          const rtiLayer = new OpenLIME.LayerRTI({ id: 'rti-layer-01', layout: 'image', url: '../rti/dalle-01/info.json' });
+          const rtiLayer = new OpenLIME.LayerRTI({ id: 'rti-layer-01', layout: 'deepzoom', url: '../rti/dalle-01/info.json' });
           viewer.addLayer(rtiLayer);
           rtiLayer.addEvent('ready', () => {
             viewer.camera.fitCameraBox(viewer.camera.boundingBox());
