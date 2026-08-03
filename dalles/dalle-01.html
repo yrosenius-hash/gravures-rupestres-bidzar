@@ -69,10 +69,13 @@
 
                 const viewer = new OpenLIME.Viewer("rti-01");
 
-                viewer.addLayer({
+                const rtiLayer = new OpenLIME.Layer({
                     type: "rti",
-                    url: "../rti/dalle-01/info.json"
+                    url: "../rti/dalle-01/info.json",
+                    layout: "image"
                 });
+
+                viewer.addLayer("rti", rtiLayer);
 
                 new OpenLIME.UIBasic(viewer);
 
