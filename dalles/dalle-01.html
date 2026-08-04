@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalle n°01 — CONUVAGRUB</title>
-<link rel="stylesheet" href="../style.css">
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dalle n°01 — CONUVAGRUB</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://unpkg.com/openlime@1.2.6/dist/css/skin.css">
+  <link rel="stylesheet" href="https://unpkg.com/openlime@1.2.6/dist/css/light.css">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+  <style>
+    .rti-wrap {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: #000;
+      border: 1px solid rgba(237,228,211,0.2);
+      overflow: hidden;
+    }
+    .rti-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      color: #EDE4D3;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background: rgba(0,0,0,0.55);
+      z-index: 2;
+    }
+    .rti-toolbar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .rti-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      background: rgba(43,39,36,0.9);
+      color: var(--craie);
+      border: 1px solid rgba(237,228,211,0.25);
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+    }
+    .rti-btn:hover {
+      background: rgba(43,39,36,1);
+    }
+  </style>
 </head>
 <body>
 
@@ -45,8 +89,21 @@
     <div class="section-inner">
       <p class="eyebrow">Modèle 3D — photogrammétrie</p>
       <div style="position:relative;">
-        <model-viewer id="mv-01" class="modele-3d" style="aspect-ratio:4/3;" src="../dalle-01.glb" alt="Dalle gravée n°01, Bidzar" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
-        <button onclick="document.getElementById('mv-01').requestFullscreen()" style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer;">Plein écran ⤢</button>
+        <model-viewer
+          id="mv-01"
+          class="modele-3d"
+          style="aspect-ratio:4/3;"
+          src="../dalle-01.glb"
+          alt="Dalle gravée n°01, Bidzar"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1">
+        </model-viewer>
+        <button
+          onclick="document.getElementById('mv-01').requestFullscreen()"
+          style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer;">
+          Plein écran ⤢
+        </button>
       </div>
     </div>
   </section>
@@ -54,29 +111,77 @@
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
-      <div id="rti-01" class="relight" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2); color:#EDE4D3; font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;">Chargement du visualiseur RTI…</div>
+
+      <div class="rti-wrap">
+        <div id="rti-01" class="rti-overlay">Chargement du visualiseur RTI…</div>
+      </div>
+
+      <div class="rti-toolbar">
+        <button id="rti-retry" class="rti-btn" type="button">Recharger RTI</button>
+        <button id="rti-toggle" class="rti-btn" type="button">Afficher / masquer le message</button>
+      </div>
+
       <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
-      <p style="margin-top:1rem;"><a class="bouton" href="../dalle-01.rti" download>Télécharger le fichier RTI</a> <span class="meta-line">(à ouvrir avec RTIViewer si le visualiseur ci-dessus ne fonctionne pas)</span></p>
-      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/hammer.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-viewer.min.js"></script>
+
+      <script src="https://unpkg.com/openlime@1.2.6/dist/js/openlime.min.js"></script>
       <script>
-        window.addEventListener('load', function() {
-          const container = document.getElementById('rti-01');
-          try {
-            if (typeof RelightViewer === 'undefined') {
-              throw new Error('La bibliothèque RelightViewer ne s\'est pas chargée (CDN indisponible).');
-            }
-            container.textContent = '';
-            new RelightViewer('#rti-01', {
-              url: '../rti/dalle-01',
-              layout: 'image'
-            });
-          } catch (err) {
-            container.style.display = 'block';
-            container.textContent = 'Erreur RTI : ' + err.message;
-            console.error('Erreur RelightViewer complète :', err);
+        (() => {
+          const container = document.getElementById("rti-01");
+          const retryBtn = document.getElementById("rti-retry");
+          const toggleBtn = document.getElementById("rti-toggle");
+          let viewer = null;
+
+          function showMessage(text) {
+            container.style.display = "flex";
+            container.textContent = text;
           }
-        });
+
+          function hideMessage() {
+            container.style.display = "none";
+          }
+
+          function initRTI() {
+            try {
+              if (!window.OpenLIME) {
+                showMessage("OpenLIME n'a pas pu être chargé.");
+                return;
+              }
+
+              container.innerHTML = "";
+              container.style.display = "none";
+
+              viewer = new OpenLIME.Viewer("rti-01");
+              const layer = new OpenLIME.LayerRTI({
+                id: "rti",
+                url: "../rti/dalle-01/",
+                layout: "image"
+              });
+
+              viewer.addLayer(layer);
+              new OpenLIME.UIBasic(viewer);
+            } catch (e) {
+              showMessage("Erreur RTI : " + e.message);
+              console.error(e);
+            }
+          }
+
+          window.addEventListener("load", initRTI);
+
+          retryBtn.addEventListener("click", () => {
+            showMessage("Rechargement du visualiseur RTI…");
+            setTimeout(() => {
+              initRTI();
+            }, 100);
+          });
+
+          toggleBtn.addEventListener("click", () => {
+            if (container.style.display === "none") {
+              container.style.display = "flex";
+            } else {
+              container.style.display = "none";
+            }
+          });
+        })();
       </script>
     </div>
   </section>
