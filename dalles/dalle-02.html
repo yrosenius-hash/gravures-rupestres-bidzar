@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dalle n°02 — CONUVAGRUB</title>
 <link rel="stylesheet" href="../style.css">
+
+<!-- Visionneuse 3D -->
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+<!-- Bibliothèque OpenLIME (pour lire le fichier info.json de RelightLab) -->
+<script src="https://unpkg.com/openlime/dist/openlime.js"></script>
 </head>
 <body>
 
@@ -53,13 +58,37 @@
 
   <section class="section dalle">
     <div class="section-inner">
-      <p class="eyebrow">Imagerie RTI</p>
-      <p class="lede">Ouvrez ce fichier directement dans le logiciel gratuit <strong>RTIViewer</strong> (File &rarr; Open URL), sans téléchargement préalable, pour déplacer la direction de la lumière et révéler le relief gravé.</p>
-      <div style="margin-top:1.5rem; border:1px solid rgba(237,228,211,0.25); padding:1rem; display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
-        <input id="rti-url-02" type="text" readonly value="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" style="flex:1; min-width:220px; background:transparent; border:none; color:var(--craie); font-family:var(--font-mono); font-size:0.78rem; padding:0.4rem;" onclick="this.select()">
-        <button class="bouton" style="border:none; cursor:pointer;" onclick="navigator.clipboard.writeText(document.getElementById('rti-url-02').value); this.textContent='Copié ✓'; setTimeout(() => this.textContent='Copier le lien', 1800);">Copier le lien</button>
+      <p class="eyebrow">Imagerie RTI Interactive</p>
+      <p class="lede">Glissez votre doigt ou le curseur sur l'image pour déplacer la source lumineuse et révéler les détails du relief gravé.</p>
+
+      <!-- Zone d'affichage OpenLIME -->
+      <div style="position:relative; width:100%; aspect-ratio:4/3; background:#111; margin-top:1.5rem; border:1px solid rgba(237,228,211,0.25);">
+        <div id="lime-viewer" style="width:100%; height:100%; touch-action:none;"></div>
+        <button onclick="document.getElementById('lime-viewer').requestFullscreen()" style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer; z-index:10;">Plein écran ⤢</button>
       </div>
-      <p class="meta-line" style="margin-top:1rem;">RTIViewer gratuit, disponible sur culturalheritageimaging.org (Windows / Mac).</p>
+
+      <!-- Script de chargement OpenLIME relié à votre dossier rti-2/info.json -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var viewer = new OpenLIME.Viewer('lime-viewer');
+            var layer = new OpenLIME.Layer({ 
+                url: '../rti-2/info.json' 
+            }); 
+            viewer.addLayer(layer);
+        });
+      </script>
+
+      <!-- Option de téléchargement / RTIViewer -->
+      <div style="margin-top:2.5rem;">
+        <p class="eyebrow" style="font-size:0.8rem; margin-bottom:0.5rem;">Alternative : Visualisation hors-ligne</p>
+        <p class="meta-line" style="margin-bottom:1rem;">Ouvrez ce fichier directement dans le logiciel gratuit <strong>RTIViewer</strong> (File &rarr; Open URL).</p>
+        <div style="border:1px solid rgba(237,228,211,0.25); padding:1rem; display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
+          <input id="rti-url-02" type="text" readonly value="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" style="flex:1; min-width:220px; background:transparent; border:none; color:var(--craie); font-family:var(--font-mono); font-size:0.78rem; padding:0.4rem;" onclick="this.select()">
+          <button class="bouton" style="border:none; cursor:pointer;" onclick="navigator.clipboard.writeText(document.getElementById('rti-url-02').value); this.textContent='Copié ✓'; setTimeout(() => this.textContent='Copier le lien', 1800);">Copier le lien</button>
+        </div>
+        <p class="meta-line" style="margin-top:1rem;">RTIViewer gratuit, disponible sur culturalheritageimaging.org (Windows / Mac).</p>
+      </div>
+
     </div>
   </section>
 
