@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalle n°01 — CONUVAGRUB</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="https://unpkg.com/openlime@1.2.6/dist/css/skin.css">
+<link rel="stylesheet" href="https://unpkg.com/openlime@1.2.6/dist/css/light.css">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-mark" href="../index.html">CONUVAGRUB <span>· Bidzar</span></a>
+    <nav class="site-nav">
+      <a href="../index.html">Accueil</a>
+      <a href="../musee-virtuel.html" aria-current="page">Musée virtuel</a>
+      <a href="../methodologie.html">Méthodologie numérique frugale</a>
+      <a href="../contact.html">Contact &amp; enquête</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="section dalle dalle--auto">
+    <div class="section-inner">
+      <p class="eyebrow"><a href="../galerie.html" style="color: var(--ocre);">&larr; Galerie</a></p>
+      <h1>Dalle n°01</h1>
+      <p class="lede">Fiche documentaire : photo de terrain, modèle 3D par photogrammétrie, imagerie RTI.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="eyebrow">Photo de terrain</p>
+      <a href="../dalle-01.jpg" target="_blank" rel="noopener" style="display:block; position:relative;">
+        <img src="../dalle-01.jpg" alt="Dalle gravée n°01, Bidzar — photo de terrain" style="width:100%; height:auto; border:1px solid rgba(43,39,36,0.14); display:block;">
+        <span class="meta-line" style="position:absolute; bottom:0.6rem; right:0.6rem; background:rgba(43,39,36,0.75); color:var(--craie); padding:0.3rem 0.6rem;">Agrandir ↗</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="eyebrow">Modèle 3D — photogrammétrie</p>
+      <div style="position:relative;">
+        <model-viewer id="mv-01" class="modele-3d" style="aspect-ratio:4/3;" src="../dalle-01.glb" alt="Dalle gravée n°01, Bidzar" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
+        <button onclick="document.getElementById('mv-01').requestFullscreen()" style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer;">Plein écran ⤢</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dalle">
+    <div class="section-inner">
+      <p class="eyebrow">Imagerie RTI</p>
+      <p class="meta-line" style="color:var(--ocre);">[Test v9 — si vous voyez ce texte, la dernière version est bien chargée]</p>
+      <div id="rti-01" style="position:relative; aspect-ratio:4/3; background:#000; border:1px solid rgba(237,228,211,0.2); color:#EDE4D3; font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;">Chargement du visualiseur RTI…</div>
+      <p class="meta-line" style="margin-top:0.6rem;">Faites glisser pour déplacer la direction de la lumière.</p>
+      <script src="https://unpkg.com/openlime@1.2.6/dist/js/openlime.min.js"></script>
+      <script>
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            const container = document.getElementById('rti-01');
+            try {
+              if (typeof OpenLIME === 'undefined') {
+                throw new Error('La bibliothèque OpenLIME ne s\'est pas chargée (CDN indisponible).');
+              }
+              container.textContent = '';
+              const viewer = new OpenLIME.Viewer('#rti-01', { layout: 'basic' });
+              viewer.addLayer('rti', {
+                id: 'rti-layer-01',
+                url: '../rti/dalle-01/info.json',
+                layout: 'image'
+              });
+              new OpenLIME.UIBasic(viewer);
+            } catch (err) {
+              container.style.display = 'block';
+              container.textContent = 'Erreur RTI : ' + err.message;
+              const detail = document.createElement('pre');
+              detail.style.cssText = 'text-align:left; font-size:0.65rem; white-space:pre-wrap; margin-top:1rem; color:rgba(237,228,211,0.6);';
+              detail.textContent = err.stack || '(pas de détail supplémentaire)';
+              container.appendChild(detail);
+              console.error('Erreur OpenLIME complète :', err);
+            }
+          }, 150);
+        });
+      </script>
+    </div>
+  </section>
+
+  <section class="section dalle">
+    <div class="section-inner">
+      <p class="eyebrow">Télécharger pour RTIViewer</p>
+      <p class="lede">Ouvrez ce fichier directement dans le logiciel gratuit <strong>RTIViewer</strong> (File &rarr; Open URL), sans téléchargement préalable, pour déplacer la direction de la lumière et révéler le relief gravé.</p>
+      <div style="margin-top:1.5rem; border:1px solid rgba(237,228,211,0.25); padding:1rem; display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
+        <input id="rti-url-01" type="text" readonly value="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-01.rti" style="flex:1; min-width:220px; background:transparent; border:none; color:var(--craie); font-family:var(--font-mono); font-size:0.78rem; padding:0.4rem;" onclick="this.select()">
+        <button class="bouton" style="border:none; cursor:pointer;" onclick="navigator.clipboard.writeText(document.getElementById('rti-url-01').value); this.textContent='Copié ✓'; setTimeout(() => this.textContent='Copier le lien', 1800);">Copier le lien</button>
+      </div>
+      <p class="meta-line" style="margin-top:1rem;">RTIViewer gratuit, disponible sur culturalheritageimaging.org (Windows / Mac).</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span>CONUVAGRUB — Bidzar, Cameroun</span>
+    <span><a href="../galerie.html" style="color:inherit;">&larr; Retour à la galerie</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
