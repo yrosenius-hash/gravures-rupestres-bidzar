@@ -54,7 +54,12 @@
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
-      <div class="media-slot media-slot--large" style="border-color: rgba(237,228,211,0.4); color: rgba(237,228,211,0.65);">Visualiseur RTI — Dalle n°05<br><span class="meta-line">à intégrer</span></div>
+      <p class="lede">Ouvrez ce fichier directement dans le logiciel gratuit <strong>RTIViewer</strong> (File &rarr; Open URL), sans téléchargement préalable, pour déplacer la direction de la lumière et révéler le relief gravé.</p>
+      <div style="margin-top:1.5rem; border:1px solid rgba(237,228,211,0.25); padding:1rem; display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
+        <input id="rti-url-05" type="text" readonly value="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-05.rti" style="flex:1; min-width:220px; background:transparent; border:none; color:var(--craie); font-family:var(--font-mono); font-size:0.78rem; padding:0.4rem;" onclick="this.select()">
+        <button class="bouton" style="border:none; cursor:pointer;" onclick="navigator.clipboard.writeText(document.getElementById('rti-url-05').value); this.textContent='Copié ✓'; setTimeout(() => this.textContent='Copier le lien', 1800);">Copier le lien</button>
+      </div>
+      <p class="meta-line" style="margin-top:1rem;">RTIViewer gratuit, disponible sur culturalheritageimaging.org (Windows / Mac).</p>
     </div>
   </section>
 
