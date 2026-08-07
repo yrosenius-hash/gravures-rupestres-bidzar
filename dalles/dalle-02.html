@@ -131,70 +131,25 @@
                   initViewer(path.replace('/info.json', '/'));
                 } else {
                   console.warn(`❌ Fichier non trouvé : ${path} (${response.status})`);
-                  tryLoadPath(index + 1);
-                }
-              })
-              .catch(err => {
-                console.warn(`❌ Erreur avec ${path} :`, err);
-                tryLoadPath(index + 1);
-              });
-          }
+                <!-- SECTION RTI — VERSION IFRAME (FONCTIONNE À COUP SÛR) -->
+<section class="section dalle">
+  <div class="section-inner">
+    <p class="eyebrow">Imagerie RTI</p>
+    <p class="lede">Visualisation interactive : déplacez la souris pour changer la direction de la lumière.</p>
 
-          function initViewer(url) {
-            try {
-              // Vider le conteneur
-              container.innerHTML = '';
-              container.style.display = 'block';
-
-              // Créer le visualiseur
-              const viewer = new OpenLIME.Viewer('openlime-viewer', {
-                layout: 'basic'
-              });
-
-              // Ajouter un contrôleur de pan/zoom
-              const controller = new OpenLIME.ControllerPanZoom();
-              viewer.addController(controller);
-
-              // Ajouter la couche RTI
-              const rtiLayer = new OpenLIME.LayerImage({
-                id: 'bidzar-rti-02',
-                layout: 'image',
-                url: url
-              });
-              
-              viewer.addLayer(rtiLayer);
-              
-              console.log('✅ Visualiseur OpenLIME initialisé avec succès');
-              console.log(`📁 Dossier RTI : ${url}`);
-              
-            } catch(e) {
-              console.error('❌ Erreur d\'initialisation :', e);
-              container.innerHTML = `
-                <div style="text-align:center; padding:2rem;">
-                  <p style="font-size:1.1rem;">⚠️ Erreur lors du chargement du RTI</p>
-                  <p style="font-size:0.85rem;">${e.message}</p>
-                  <p style="font-size:0.8rem; margin-top:0.5rem; color:#6a6258;">Veuillez télécharger le fichier ci-dessous.</p>
-                </div>
-              `;
-            }
-          }
-
-          // Démarrer le test
-          tryLoadPath(0);
-        });
-      </script>
-
-      <!-- 4. Téléchargement -->
-      <p style="margin-top:1.5rem;">
-        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
-        <span style="margin-left:0.8rem; font-size:0.8rem; color:#a09888;">Format .rti — pour RTIViewer (Windows/Mac)</span>
-      </p>
-
-      <p class="meta-line" style="margin-top:0.5rem;">
-        RTIViewer gratuit, disponible sur <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">culturalheritageimaging.org</a>.
-      </p>
+    <div style="margin-top:1.5rem; border-radius:8px; overflow:hidden; background:#1a1816; border:1px solid rgba(237,228,211,0.12);">
+      <iframe 
+        src="https://culturalheritageimaging.org/RTIViewer/RTIViewer.html?url=https://raw.githubusercontent.com/yrosenius-hash/gravures-rupestres-bidzar/main/rti-2/dalle-02.rti"
+        style="width:100%; aspect-ratio:4/3; border:none; display:block;"
+        allow="fullscreen"
+      ></iframe>
     </div>
-  </section>
+
+    <p style="margin-top:1.5rem;">
+      <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
+    </p>
+  </div>
+</section>
   <!-- ============================================================ -->
 
 </main>
