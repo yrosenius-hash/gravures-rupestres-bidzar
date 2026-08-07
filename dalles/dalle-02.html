@@ -51,81 +51,74 @@
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- SECTION RTI — MODIFIÉE AVEC VISUALISEUR INTERACTIF            -->
-  <!-- ============================================================ -->
   <section class="section dalle">
     <div class="section-inner">
-      <p class="eyebrow">Imagerie RTI</p>
-      <p class="lede">Visualisation interactive : déplacez la souris pour changer la direction de la lumière et révéler les reliefs gravés.</p>
+      <p class="eyebrow">Imagerie RTI — visualisation interactive</p>
+      <p class="meta-line" style="color:var(--ocre);">[Test v12 — RelightViewer, dossier rti-2]</p>
+      <p class="lede" style="margin-top:0.6rem;">Déplacez la souris pour changer la direction de la lumière et révéler le relief gravé.</p>
 
-      <!-- 1. Inclure la bibliothèque Relight -->
-      <script src="https://cdn.jsdelivr.net/npm/relight@1.0.0/dist/relight.min.js"></script>
-
-      <!-- 2. Conteneur du visualiseur RTI -->
       <div style="position:relative; margin-top:1.5rem; background:#1a1816; border-radius:8px; overflow:hidden; border:1px solid rgba(237,228,211,0.12); box-shadow:0 8px 32px rgba(0,0,0,0.3);">
-        <canvas id="rti-canvas-02" style="width:100%; height:600px; display:block; cursor:pointer;"></canvas>
-        <div style="position:absolute; bottom:0.6rem; left:0.6rem; right:0.6rem; display:flex; justify-content:space-between; pointer-events:none;">
-          <span style="background:rgba(0,0,0,0.65); color:#f0ebe3; padding:0.25rem 0.7rem; font-size:0.7rem; border-radius:4px; backdrop-filter:blur(4px);">🖱️ Déplacez la souris · orientez la lumière</span>
-          <span style="background:rgba(0,0,0,0.65); color:#f0ebe3; padding:0.25rem 0.7rem; font-size:0.7rem; border-radius:4px; backdrop-filter:blur(4px);">RTI · Bidzar</span>
-        </div>
-        <!-- Petit indicateur "clic pour réinitialiser" -->
-        <div style="position:absolute; bottom:2.6rem; left:0.6rem; pointer-events:none;">
-          <span style="background:rgba(0,0,0,0.4); color:#a09888; padding:0.1rem 0.6rem; font-size:0.6rem; border-radius:4px;">↺ clic = lumière centrale</span>
+        <div id="relight-container-02" class="relight" style="width:100%; aspect-ratio:4/3; color:#EDE4D3; font-family:var(--font-mono); font-size:0.8rem; display:flex; align-items:center; justify-content:center; text-align:center; padding:1rem;">Chargement du visualiseur RTI…</div>
+        <div id="relight-badges-02" style="position:absolute; bottom:0.6rem; left:0.6rem; right:0.6rem; display:none; justify-content:space-between; pointer-events:none;">
+          <span style="background:rgba(0,0,0,0.65); color:#f0ebe3; padding:0.25rem 0.7rem; font-size:0.7rem; border-radius:4px;">🖱️ Déplacez la souris · orientez la lumière</span>
+          <span style="background:rgba(0,0,0,0.65); color:#f0ebe3; padding:0.25rem 0.7rem; font-size:0.7rem; border-radius:4px;">RTI · Bidzar</span>
         </div>
       </div>
 
-      <!-- 3. Script d'initialisation du visualiseur -->
+      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/hammer.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-core.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-shaders.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-canvas.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-interface.js"></script>
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const canvas = document.getElementById('rti-canvas-02');
-          
-          // Initialiser Relight — chemin relatif depuis dalle/dalle-02.html vers rti-2/
-          const viewer = new Relight(canvas, {
-            url: '../rti-2/',
-            layout: 'image'
-          });
-
-          // Lumière initiale : en haut à droite
-          viewer.light = [0.4, 0.6, 1.0];
-          viewer.render();
-
-          // Interaction : la souris contrôle la direction de la lumière
-          let isInteracting = false;
-          canvas.addEventListener('mousedown', () => isInteracting = true);
-          canvas.addEventListener('mouseup', () => isInteracting = false);
-          canvas.addEventListener('mouseleave', () => isInteracting = false);
-
-          canvas.addEventListener('mousemove', function(e) {
-            if (!isInteracting) {
-              const rect = canvas.getBoundingClientRect();
-              const x = (e.clientX - rect.left) / rect.width * 2 - 1;
-              const y = -(e.clientY - rect.top) / rect.height * 2 + 1;
-              viewer.light = [x, y, 1.0];
-              viewer.render();
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            const container = document.getElementById('relight-container-02');
+            try {
+              if (typeof RelightViewer === 'undefined') {
+                throw new Error('La bibliothèque RelightViewer ne s\'est pas chargée (CDN indisponible).');
+              }
+              container.textContent = '';
+              container.style.display = '';
+              new RelightViewer('#relight-container-02', {
+                layers: [
+                  { position: [0, 0], rotation: 0, scale: 1, url: '../rti-2', layout: 'image', visible: true }
+                ]
+              });
+              document.getElementById('relight-badges-02').style.display = 'flex';
+            } catch (err) {
+              container.style.display = 'flex';
+              container.textContent = 'Erreur RTI : ' + err.message;
+              const detail = document.createElement('pre');
+              detail.style.cssText = 'text-align:left; font-size:0.65rem; white-space:pre-wrap; margin-top:1rem; color:rgba(237,228,211,0.6);';
+              detail.textContent = err.stack || '(pas de détail supplémentaire)';
+              container.appendChild(detail);
+              console.error('Erreur RelightViewer complète :', err);
             }
-          });
-
-          // Clic : réinitialiser la lumière au centre
-          canvas.addEventListener('click', function() {
-            viewer.light = [0.0, 0.0, 1.0];
-            viewer.render();
-          });
+          }, 150);
         });
       </script>
-
-      <!-- 4. Téléchargement du fichier RTI (optionnel) -->
-      <p style="margin-top:1.5rem;">
-        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
-        <span style="margin-left:0.8rem; font-size:0.8rem; color:#a09888;">Format .rti — pour RTIViewer (Windows/Mac)</span>
-      </p>
-
-      <p class="meta-line" style="margin-top:1rem;">RTIViewer gratuit, disponible sur <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">culturalheritageimaging.org</a>.</p>
     </div>
   </section>
-  <!-- ============================================================ -->
-  <!-- FIN SECTION RTI                                               -->
-  <!-- ============================================================ -->
+
+  <section class="section dalle">
+    <div class="section-inner">
+      <p class="eyebrow">Imagerie RTI</p>
+      <p class="lede">Deux façons de consulter le fichier RTI complet, qui révèle le relief gravé sous différents angles de lumière.</p>
+
+      <p style="margin-top:1.5rem;">
+        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
+      </p>
+
+      <p class="meta-line" style="margin-top:1.5rem;">Ou visualiser en ligne sans téléchargement, avec RTIViewer (File &rarr; Open URL) :</p>
+      <div style="margin-top:0.6rem; border:1px solid rgba(237,228,211,0.25); padding:1rem; display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
+        <input id="rti-url-02" type="text" readonly value="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" style="flex:1; min-width:220px; background:transparent; border:none; color:var(--craie); font-family:var(--font-mono); font-size:0.78rem; padding:0.4rem;" onclick="this.select()">
+        <button class="bouton" style="border:none; cursor:pointer;" onclick="navigator.clipboard.writeText(document.getElementById('rti-url-02').value); this.textContent='Copié ✓'; setTimeout(() => this.textContent='Copier le lien', 1800);">Copier le lien</button>
+      </div>
+
+      <p class="meta-line" style="margin-top:1rem;">RTIViewer gratuit, disponible sur culturalheritageimaging.org (Windows / Mac).</p>
+    </div>
+  </section>
 
 </main>
 
