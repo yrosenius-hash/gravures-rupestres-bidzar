@@ -52,20 +52,21 @@
   </section>
 
   <!-- ============================================================ -->
-  <!-- SECTION RTI — VERSION IFRAME (FONCTIONNE À COUP SÛR)        -->
+  <!-- SECTION RTI — OPENLIME AVEC DOSSIER RTI-2 LOCAL              -->
   <!-- ============================================================ -->
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
       <p class="lede">Visualisation interactive : déplacez la souris pour changer la direction de la lumière et révéler les reliefs gravés.</p>
 
+      <!-- CSS OpenLIME -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/openlime.min.css">
+
+      <!-- Conteneur -->
       <div style="position:relative; margin-top:1.5rem; background:#1a1816; border-radius:8px; overflow:hidden; border:1px solid rgba(237,228,211,0.12); box-shadow:0 8px 32px rgba(0,0,0,0.3);">
-        <iframe 
-          src="https://culturalheritageimaging.org/RTIViewer/RTIViewer.html?url=https://raw.githubusercontent.com/yrosenius-hash/gravures-rupestres-bidzar/main/rti-2/dalle-02.rti"
-          style="width:100%; aspect-ratio:4/3; border:none; display:block; background:#1a1816;"
-          allow="fullscreen"
-          loading="lazy"
-        ></iframe>
+        <div id="openlime-viewer" style="width:100%; aspect-ratio:4/3; background:#1a1816; display:flex; align-items:center; justify-content:center; color:#a09888; flex-direction:column;">
+          <span style="font-size:1.1rem;">⏳ Chargement du RTI...</span>
+        </div>
         <div style="position:absolute; bottom:0.6rem; left:0.6rem; right:0.6rem; display:flex; justify-content:space-between; pointer-events:none; z-index:10;">
           <span style="background:rgba(0,0,0,0.65); color:#f0ebe3; padding:0.25rem 0.7rem; font-size:0.7rem; border-radius:4px; backdrop-filter:blur(4px);">
             🖱️ Déplacez la souris · orientez la lumière
@@ -76,17 +77,66 @@
         </div>
       </div>
 
-      <p style="margin-top:1.5rem; font-size:0.8rem; color:#a09888; text-align:center;">
-        💡 Cliquez sur l'image RTI, puis déplacez la souris pour orienter la lumière.
-      </p>
+      <!-- Script OpenLIME -->
+      <script src="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/js/openlime.min.js"></script>
 
-      <p style="margin-top:1rem;">
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const container = document.getElementById('openlime-viewer');
+          
+          // Vérifier OpenLIME
+          if (typeof OpenLIME === 'undefined') {
+            container.innerHTML = `
+              <div style="text-align:center; padding:2rem;">
+                <p style="font-size:1.1rem;">⚠️ Visualiseur RTI indisponible</p>
+                <p style="font-size:0.85rem;">La bibliothèque OpenLIME n'a pas pu être chargée.</p>
+              </div>
+            `;
+            return;
+          }
+
+          try {
+            // Créer le visualiseur
+            const viewer = new OpenLIME.Viewer('openlime-viewer', {
+              layout: 'basic'
+            });
+
+            // Contrôleur de pan/zoom
+            const controller = new OpenLIME.ControllerPanZoom();
+            viewer.addController(controller);
+
+            // Charger le RTI depuis le dossier rti-2/
+            const rtiLayer = new OpenLIME.LayerImage({
+              id: 'bidzar-rti-02',
+              layout: 'image',
+              url: '../rti-2/'
+            });
+            
+            viewer.addLayer(rtiLayer);
+            
+            console.log('✅ RTI chargé depuis rti-2/');
+
+          } catch(e) {
+            console.error('❌ Erreur :', e);
+            container.innerHTML = `
+              <div style="text-align:center; padding:2rem;">
+                <p style="font-size:1.1rem;">⚠️ Erreur de chargement</p>
+                <p style="font-size:0.85rem;">${e.message}</p>
+                <p style="font-size:0.8rem; margin-top:0.5rem; color:#6a6258;">Vérifiez que le dossier <code style="background:#2a2826;padding:0.2rem 0.6rem;border-radius:4px;">rti-2/</code> est présent à la racine.</p>
+              </div>
+            `;
+          }
+        });
+      </script>
+
+      <!-- Téléchargement du fichier .rti (depuis les Releases) -->
+      <p style="margin-top:1.5rem;">
         <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
         <span style="margin-left:0.8rem; font-size:0.8rem; color:#a09888;">Format .rti — pour RTIViewer (Windows/Mac)</span>
       </p>
 
       <p class="meta-line" style="margin-top:0.5rem;">
-        RTIViewer gratuit, disponible sur <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">culturalheritageimaging.org</a>.
+        RTIViewer gratuit sur <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">culturalheritageimaging.org</a>.
       </p>
     </div>
   </section>
