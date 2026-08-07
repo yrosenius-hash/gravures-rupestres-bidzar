@@ -52,79 +52,33 @@
   </section>
 
   <!-- ============================================================ -->
-  <!-- SECTION RTI — MODIFIÉE AVEC VISUALISEUR INTERACTIF            -->
+  <!-- SECTION RTI — VERSION CORRIGÉE AVEC OPENLIME                 -->
   <!-- ============================================================ -->
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
       <p class="lede">Visualisation interactive : déplacez la souris pour changer la direction de la lumière et révéler les reliefs gravés.</p>
 
-      <!-- 1. Inclure la bibliothèque Relight -->
-      <script src="https://cdn.jsdelivr.net/npm/relight@1.0.0/dist/relight.min.js"></script>
+      <!-- 1. CSS OpenLIME -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/openlime.min.css">
 
-      <!-- 2. Conteneur du visualiseur RTI -->
-      <div style="position:relative; margin-top:1.5rem; background:#1a1816; border-radius:8px; overflow:hidden; border:1px solid rgba(237,228,211,0.12); box-shadow:0 8px 32px rgba(0,0,0,0.3);">
-        <canvas id="rti-canvas-02" style="width:100%; height:600px; display:block; cursor:pointer;"></canvas>
-        <div style="position:absolute; bottom:0.6rem; left:0.6rem; right:0.6rem; display:flex; justify-content:space-between; pointer-events:none;">
-          <span style="background:rgba(0,0,0,0.65); color:#f0ebe3; padding:0.25rem 0.7rem; font-size:0.7rem; border-radius:4px; backdrop-filter:blur(4px);">🖱️ Déplacez la souris · orientez la lumière</span>
-          <span style="background:rgba(0,0,0,0.65); color:#f0ebe3; padding:0.25rem 0.7rem; font-size:0.7rem; border-radius:4px; backdrop-filter:blur(4px);">RTI · Bidzar</span>
-        </div>
-        <!-- Petit indicateur "clic pour réinitialiser" -->
-        <div style="position:absolute; bottom:2.6rem; left:0.6rem; pointer-events:none;">
-          <span style="background:rgba(0,0,0,0.4); color:#a09888; padding:0.1rem 0.6rem; font-size:0.6rem; border-radius:4px;">↺ clic = lumière centrale</span>
-        </div>
-      </div>
+      <!-- 2. Conteneur OpenLIME -->
+      <div id="openlime-viewer" style="width:100%; height:70vh; max-height:700px; min-height:350px; background:#1a1816; border-radius:8px; overflow:hidden; border:1px solid rgba(237,228,211,0.12);"></div>
 
-      <!-- 3. Script d'initialisation du visualiseur -->
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const canvas = document.getElementById('rti-canvas-02');
-          
-          // Initialiser Relight — chemin relatif depuis dalle/dalle-02.html vers rti-2/
-          const viewer = new Relight(canvas, {
-            url: '../rti-2/',
-            layout: 'image'
-          });
+      <p style="margin-top:1rem; font-size:0.8rem; color:#a09888; text-align:center;">
+        🖱️ Déplacez la souris pour orienter la lumière · Molette pour zoomer
+      </p>
 
-          // Lumière initiale : en haut à droite
-          viewer.light = [0.4, 0.6, 1.0];
-          viewer.render();
-
-          // Interaction : la souris contrôle la direction de la lumière
-          let isInteracting = false;
-          canvas.addEventListener('mousedown', () => isInteracting = true);
-          canvas.addEventListener('mouseup', () => isInteracting = false);
-          canvas.addEventListener('mouseleave', () => isInteracting = false);
-
-          canvas.addEventListener('mousemove', function(e) {
-            if (!isInteracting) {
-              const rect = canvas.getBoundingClientRect();
-              const x = (e.clientX - rect.left) / rect.width * 2 - 1;
-              const y = -(e.clientY - rect.top) / rect.height * 2 + 1;
-              viewer.light = [x, y, 1.0];
-              viewer.render();
-            }
-          });
-
-          // Clic : réinitialiser la lumière au centre
-          canvas.addEventListener('click', function() {
-            viewer.light = [0.0, 0.0, 1.0];
-            viewer.render();
-          });
-        });
-      </script>
-
-      <!-- 4. Téléchargement du fichier RTI (optionnel) -->
       <p style="margin-top:1.5rem;">
         <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
         <span style="margin-left:0.8rem; font-size:0.8rem; color:#a09888;">Format .rti — pour RTIViewer (Windows/Mac)</span>
       </p>
 
-      <p class="meta-line" style="margin-top:1rem;">RTIViewer gratuit, disponible sur <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">culturalheritageimaging.org</a>.</p>
+      <p class="meta-line" style="margin-top:0.5rem;">RTIViewer gratuit, disponible sur <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">culturalheritageimaging.org</a>.</p>
     </div>
   </section>
   <!-- ============================================================ -->
-  <!-- FIN SECTION RTI                                               -->
+  <!-- FIN SECTION RTI                                              -->
   <!-- ============================================================ -->
 
 </main>
@@ -135,6 +89,46 @@
     <span><a href="../galerie.html" style="color:inherit;">&larr; Retour à la galerie</a></span>
   </div>
 </footer>
+
+<!-- 3. Script OpenLIME -->
+<script src="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/js/openlime.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Vérifier que la bibliothèque est chargée
+    if (typeof OpenLIME === 'undefined') {
+      console.error('❌ OpenLIME non chargé');
+      document.getElementById('openlime-viewer').innerHTML = 
+        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#a09888;padding:2rem;text-align:center;">⚠️ Le visualiseur RTI n\'a pas pu être chargé.<br>Veuillez télécharger le fichier ci-dessous.</div>';
+      return;
+    }
+
+    try {
+      // Créer le visualiseur
+      const viewer = new OpenLIME.Viewer('openlime-viewer', {
+        layout: 'basic'
+      });
+
+      // Ajouter un contrôleur de pan/zoom
+      const controller = new OpenLIME.ControllerPanZoom();
+      viewer.addController(controller);
+
+      // Ajouter la couche RTI - POINTE VERS LE DOSSIER
+      const rtiLayer = new OpenLIME.LayerImage({
+        id: 'bidzar-rti-02',
+        layout: 'image',  // Votre dossier rti-2/ contient des images simples
+        url: '../rti-2/'  // Le dossier contenant info.json et les plane_*.jpg
+      });
+      
+      viewer.addLayer(rtiLayer);
+      
+      console.log('✅ Visualiseur OpenLIME initialisé avec succès');
+    } catch(e) {
+      console.error('❌ Erreur d\'initialisation :', e);
+      document.getElementById('openlime-viewer').innerHTML = 
+        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#a09888;padding:2rem;text-align:center;">⚠️ Erreur lors du chargement du RTI.<br>Veuillez télécharger le fichier ci-dessous.</div>';
+    }
+  });
+</script>
 
 </body>
 </html>
