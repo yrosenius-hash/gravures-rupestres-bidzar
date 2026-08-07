@@ -1,134 +1,134 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dalle n°02 — CONUVAGRUB</title>
-<link rel="stylesheet" href="../style.css">
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-</head>
-<body>
+<!-- ============================================================ -->
+<!-- SECTION RTI — VERSION AVEC DIAGNOSTIC INTÉGRÉ                -->
+<!-- ============================================================ -->
+<section class="section dalle">
+  <div class="section-inner">
+    <p class="eyebrow">Imagerie RTI</p>
+    <p class="lede">Visualisation interactive : déplacez la souris pour changer la direction de la lumière et révéler les reliefs gravés.</p>
 
-<header class="site-header">
-  <div class="site-header-inner">
-    <a class="site-mark" href="../index.html">CONUVAGRUB <span>· Bidzar</span></a>
-    <nav class="site-nav">
-      <a href="../index.html">Accueil</a>
-      <a href="../musee-virtuel.html" aria-current="page">Musée virtuel</a>
-      <a href="../methodologie.html">Méthodologie numérique frugale</a>
-      <a href="../contact.html">Contact &amp; enquête</a>
-    </nav>
+    <!-- CSS OpenLIME -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/openlime.min.css">
+
+    <!-- Conteneur -->
+    <div id="openlime-viewer" style="width:100%; height:70vh; max-height:700px; min-height:350px; background:#1a1816; border-radius:8px; overflow:hidden; border:1px solid rgba(237,228,211,0.12); display:flex; align-items:center; justify-content:center; color:#a09888; flex-direction:column;">
+      <span style="font-size:1.2rem;">⏳ Chargement du RTI...</span>
+      <span style="font-size:0.8rem; margin-top:0.5rem;">Vérification des fichiers...</span>
+    </div>
+
+    <p style="margin-top:1rem; font-size:0.8rem; color:#a09888; text-align:center;">
+      🖱️ Déplacez la souris pour orienter la lumière · Molette pour zoomer
+    </p>
+
+    <p style="margin-top:1.5rem;">
+      <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
+      <span style="margin-left:0.8rem; font-size:0.8rem; color:#a09888;">Format .rti — pour RTIViewer (Windows/Mac)</span>
+    </p>
   </div>
-</header>
+</section>
 
-<main>
-
-  <section class="section dalle dalle--auto">
-    <div class="section-inner">
-      <p class="eyebrow"><a href="../galerie.html" style="color: var(--ocre);">&larr; Galerie</a></p>
-      <h1>Dalle n°02</h1>
-      <p class="lede">Fiche documentaire : photo de terrain, modèle 3D par photogrammétrie, imagerie RTI.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-inner">
-      <p class="eyebrow">Photo de terrain</p>
-      <a href="../dalle-02.jpg" target="_blank" rel="noopener" style="display:block; position:relative;">
-        <img src="../dalle-02.jpg" alt="Dalle gravée n°02, Bidzar — photo de terrain" style="width:100%; height:auto; border:1px solid rgba(43,39,36,0.14); display:block;">
-        <span class="meta-line" style="position:absolute; bottom:0.6rem; right:0.6rem; background:rgba(43,39,36,0.75); color:var(--craie); padding:0.3rem 0.6rem;">Agrandir ↗</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-inner">
-      <p class="eyebrow">Modèle 3D — photogrammétrie</p>
-      <div style="position:relative;">
-        <model-viewer id="mv-02" class="modele-3d" style="aspect-ratio:4/3;" src="../dalle-02.glb" alt="Dalle gravée n°02, Bidzar" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
-        <button onclick="document.getElementById('mv-02').requestFullscreen()" style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer;">Plein écran ⤢</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- SECTION RTI — VERSION CORRIGÉE AVEC OPENLIME                 -->
-  <!-- ============================================================ -->
-  <section class="section dalle">
-    <div class="section-inner">
-      <p class="eyebrow">Imagerie RTI</p>
-      <p class="lede">Visualisation interactive : déplacez la souris pour changer la direction de la lumière et révéler les reliefs gravés.</p>
-
-      <!-- 1. CSS OpenLIME -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/openlime.min.css">
-
-      <!-- 2. Conteneur OpenLIME -->
-      <div id="openlime-viewer" style="width:100%; height:70vh; max-height:700px; min-height:350px; background:#1a1816; border-radius:8px; overflow:hidden; border:1px solid rgba(237,228,211,0.12);"></div>
-
-      <p style="margin-top:1rem; font-size:0.8rem; color:#a09888; text-align:center;">
-        🖱️ Déplacez la souris pour orienter la lumière · Molette pour zoomer
-      </p>
-
-      <p style="margin-top:1.5rem;">
-        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le fichier RTI</a>
-        <span style="margin-left:0.8rem; font-size:0.8rem; color:#a09888;">Format .rti — pour RTIViewer (Windows/Mac)</span>
-      </p>
-
-      <p class="meta-line" style="margin-top:0.5rem;">RTIViewer gratuit, disponible sur <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">culturalheritageimaging.org</a>.</p>
-    </div>
-  </section>
-  <!-- ============================================================ -->
-  <!-- FIN SECTION RTI                                              -->
-  <!-- ============================================================ -->
-
-</main>
-
-<footer class="site-footer">
-  <div class="site-footer-inner">
-    <span>CONUVAGRUB — Bidzar, Cameroun</span>
-    <span><a href="../galerie.html" style="color:inherit;">&larr; Retour à la galerie</a></span>
-  </div>
-</footer>
-
-<!-- 3. Script OpenLIME -->
+<!-- Script OpenLIME -->
 <script src="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/js/openlime.min.js"></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Vérifier que la bibliothèque est chargée
+    const container = document.getElementById('openlime-viewer');
+    
+    // 1. Vérifier que la bibliothèque est chargée
     if (typeof OpenLIME === 'undefined') {
-      console.error('❌ OpenLIME non chargé');
-      document.getElementById('openlime-viewer').innerHTML = 
-        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#a09888;padding:2rem;text-align:center;">⚠️ Le visualiseur RTI n\'a pas pu être chargé.<br>Veuillez télécharger le fichier ci-dessous.</div>';
+      container.innerHTML = `
+        <div style="text-align:center; padding:2rem;">
+          <p style="font-size:1.2rem;">⚠️ Bibliothèque OpenLIME non chargée</p>
+          <p style="font-size:0.9rem; margin-top:0.5rem;">Vérifiez votre connexion Internet.</p>
+          <p style="font-size:0.8rem; margin-top:0.5rem; color:#6a6258;">
+            <a href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/js/openlime.min.js" target="_blank" style="color:var(--ocre);">Télécharger OpenLIME</a>
+          </p>
+        </div>
+      `;
       return;
     }
 
-    try {
-      // Créer le visualiseur
-      const viewer = new OpenLIME.Viewer('openlime-viewer', {
-        layout: 'basic'
-      });
+    // 2. Tester l'accès au fichier info.json
+    const testPaths = ['../rti-2/info.json', '/rti-2/info.json', 'rti-2/info.json'];
+    let found = false;
 
-      // Ajouter un contrôleur de pan/zoom
-      const controller = new OpenLIME.ControllerPanZoom();
-      viewer.addController(controller);
+    function tryLoadPath(index) {
+      if (index >= testPaths.length) {
+        // Aucun chemin trouvé
+        container.innerHTML = `
+          <div style="text-align:center; padding:2rem;">
+            <p style="font-size:1.2rem;">⚠️ Fichiers RTI introuvables</p>
+            <p style="font-size:0.9rem; margin-top:0.5rem;">Vérifiez que le dossier <code style="background:#2a2826; padding:0.2rem 0.6rem; border-radius:4px;">rti-2/</code> est présent à la racine du site.</p>
+            <p style="font-size:0.8rem; margin-top:0.5rem; color:#6a6258;">Chemins testés : ${testPaths.join(', ')}</p>
+          </div>
+        `;
+        return;
+      }
 
-      // Ajouter la couche RTI - POINTE VERS LE DOSSIER
-      const rtiLayer = new OpenLIME.LayerImage({
-        id: 'bidzar-rti-02',
-        layout: 'image',  // Votre dossier rti-2/ contient des images simples
-        url: '../rti-2/'  // Le dossier contenant info.json et les plane_*.jpg
-      });
-      
-      viewer.addLayer(rtiLayer);
-      
-      console.log('✅ Visualiseur OpenLIME initialisé avec succès');
-    } catch(e) {
-      console.error('❌ Erreur d\'initialisation :', e);
-      document.getElementById('openlime-viewer').innerHTML = 
-        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#a09888;padding:2rem;text-align:center;">⚠️ Erreur lors du chargement du RTI.<br>Veuillez télécharger le fichier ci-dessous.</div>';
+      const path = testPaths[index];
+      console.log(`🔍 Test du chemin : ${path}`);
+
+      fetch(path)
+        .then(response => {
+          if (response.ok) {
+            console.log(`✅ Fichier trouvé : ${path}`);
+            found = true;
+            initViewer(path.replace('/info.json', '/'));
+          } else {
+            console.warn(`❌ Fichier non trouvé : ${path} (${response.status})`);
+            tryLoadPath(index + 1);
+          }
+        })
+        .catch(err => {
+          console.warn(`❌ Erreur avec ${path} :`, err);
+          tryLoadPath(index + 1);
+        });
     }
+
+    function initViewer(url) {
+      try {
+        container.innerHTML = ''; // Vider le conteneur
+        container.style.display = 'block';
+
+        // Créer le visualiseur
+        const viewer = new OpenLIME.Viewer('openlime-viewer', {
+          layout: 'basic'
+        });
+
+        // Ajouter un contrôleur de pan/zoom
+        const controller = new OpenLIME.ControllerPanZoom();
+        viewer.addController(controller);
+
+        // Ajouter la couche RTI
+        const rtiLayer = new OpenLIME.LayerImage({
+          id: 'bidzar-rti-02',
+          layout: 'image',
+          url: url  // Le dossier contenant info.json
+        });
+        
+        viewer.addLayer(rtiLayer);
+        
+        console.log('✅ Visualiseur OpenLIME initialisé avec succès');
+        
+        // Ajouter un message de succès discret
+        const successMsg = document.createElement('div');
+        successMsg.style.cssText = 'position:absolute; bottom:0.6rem; left:0.6rem; background:rgba(0,0,0,0.6); color:#8a8278; padding:0.2rem 0.6rem; font-size:0.6rem; border-radius:4px; pointer-events:none; z-index:10;';
+        successMsg.textContent = '✓ RTI chargé';
+        container.style.position = 'relative';
+        container.appendChild(successMsg);
+        
+      } catch(e) {
+        console.error('❌ Erreur d\'initialisation :', e);
+        container.innerHTML = `
+          <div style="text-align:center; padding:2rem;">
+            <p style="font-size:1.2rem;">⚠️ Erreur lors du chargement du RTI</p>
+            <p style="font-size:0.9rem; margin-top:0.5rem;">Détail : ${e.message}</p>
+            <p style="font-size:0.8rem; margin-top:0.5rem; color:#6a6258;">Veuillez télécharger le fichier ci-dessous.</p>
+          </div>
+        `;
+      }
+    }
+
+    // Démarrer le test des chemins
+    tryLoadPath(0);
   });
 </script>
-
-</body>
-</html>
