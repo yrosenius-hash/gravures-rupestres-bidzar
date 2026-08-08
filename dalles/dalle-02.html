@@ -66,10 +66,7 @@
       </div>
 
       <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/hammer.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-core.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-shaders.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-canvas.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-interface.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/cnr-isti-vclab/relight@master/js/relight-viewer.js"></script>
       <script>
         window.addEventListener('load', function() {
           setTimeout(function() {
@@ -82,8 +79,9 @@
               container.style.display = '';
               new RelightViewer('#relight-container-02', {
                 layers: [
-                  { position: [0, 0], rotation: 0, scale: 1, url: '../rti-2', layout: 'image', visible: true }
-                ]
+                  { position: [0, 0], rotation: 0, url: '../rti-2', layout: 'image' }
+                ],
+                fit: true
               });
               document.getElementById('relight-badges-02').style.display = 'flex';
             } catch (err) {
