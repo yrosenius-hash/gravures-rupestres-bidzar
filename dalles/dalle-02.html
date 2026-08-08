@@ -51,87 +51,19 @@
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- SECTION RTI — TÉLÉCHARGEMENT LOCAL                            -->
-  <!-- ============================================================ -->
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
-      <p class="lede">Téléchargez les données RTI pour une visualisation hors ligne avec les logiciels dédiés.</p>
-
-      <!-- Message d'information -->
-      <div style="margin-top:1.5rem; padding:1.5rem; background:rgba(43,39,36,0.3); border-radius:8px; border-left:3px solid var(--ocre);">
-        <p style="font-size:0.9rem; margin-bottom:0.5rem; color:var(--craie);">
-          💡 <strong>Comment visualiser les fichiers RTI ?</strong>
-        </p>
-        <ul style="list-style:none; padding:0; margin:0; font-size:0.85rem; color:#a09888; line-height:1.8;">
-          <li>1. Téléchargez le fichier adapté à votre logiciel ci-dessous</li>
-          <li>2. Ouvrez-le avec <strong>RTIViewer</strong> (Windows/Mac) ou <strong>RelightLab</strong> (Windows/Linux/Mac)</li>
-          <li>3. Déplacez la souris pour orienter la lumière et révéler les reliefs</li>
-        </ul>
+      <p class="lede">Deux fichiers disponibles selon le logiciel utilisé pour explorer le relief gravé sous différents angles de lumière.</p>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
+        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download>Télécharger le .rti (RTIViewer)</a>
+        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/rti-02.zip" download>Télécharger l'archive (RelightLab)</a>
       </div>
-
-      <!-- Boutons de téléchargement -->
-      <div style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-
-        <!-- Option 1 : RTIViewer -->
-        <div style="background:rgba(43,39,36,0.2); border-radius:8px; padding:1.5rem; border:1px solid rgba(237,228,211,0.12);">
-          <p style="font-weight:600; margin-bottom:0.3rem; color:var(--craie);">📷 RTIViewer</p>
-          <p style="font-size:0.8rem; color:#a09888; margin-bottom:1rem;">Format .rti — pour Windows / Mac</p>
-          <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-02.rti" download style="display:inline-block;">
-            Télécharger le fichier .rti
-          </a>
-          <p style="font-size:0.7rem; color:#6a6258; margin-top:0.5rem;">
-            <a href="https://culturalheritageimaging.org" target="_blank" style="color:var(--ocre); text-decoration:underline;">Télécharger RTIViewer</a>
-          </p>
-        </div>
-
-        <!-- Option 2 : RelightLab -->
-        <div style="background:rgba(43,39,36,0.2); border-radius:8px; padding:1.5rem; border:1px solid rgba(237,228,211,0.12);">
-          <p style="font-weight:600; margin-bottom:0.3rem; color:var(--craie);">🔬 RelightLab</p>
-          <p style="font-size:0.8rem; color:#a09888; margin-bottom:1rem;">Dossier complet — pour Windows / Linux / Mac</p>
-          <a class="bouton" href="../rti-2.zip" download style="display:inline-block;">
-            Télécharger le dossier RTI
-          </a>
-          <p style="font-size:0.7rem; color:#6a6258; margin-top:0.5rem;">
-            <a href="https://vcg.isti.cnr.it/relight/" target="_blank" style="color:var(--ocre); text-decoration:underline;">Télécharger RelightLab</a>
-          </p>
-        </div>
-
-      </div>
-
-      <!-- Informations sur le contenu du dossier -->
-      <details style="margin-top:1.5rem; padding:1rem; background:rgba(43,39,36,0.15); border-radius:8px; cursor:pointer;">
-        <summary style="color:var(--craie); font-weight:500; font-size:0.9rem;">📂 Contenu du dossier RTI</summary>
-        <div style="margin-top:0.8rem; font-size:0.8rem; color:#a09888; font-family:var(--font-mono); background:#1a1816; padding:0.8rem; border-radius:4px; overflow-x:auto;">
-          <pre style="margin:0; white-space:pre-wrap; line-height:1.6;">
-rti-2/
-├── info.json          # Métadonnées du RTI
-├── plane_0.jpg        # Image 1/4
-├── plane_1.jpg        # Image 2/4
-├── plane_2.jpg        # Image 3/4
-└── plane_3.jpg        # Image 4/4
-          </pre>
-        </div>
-        <p style="font-size:0.75rem; color:#6a6258; margin-top:0.5rem;">
-          ⚠️ Ouvrez ce dossier avec RelightLab ou RTIViewer pour visualiser les gravures.
-        </p>
-      </details>
-
-      <!-- Lien vers les logiciels -->
-      <div style="margin-top:1.5rem; padding:1rem; background:rgba(43,39,36,0.15); border-radius:8px; text-align:center;">
-        <p style="font-size:0.8rem; color:#a09888; margin-bottom:0.3rem;">
-          📥 Logiciels recommandés pour visualiser les fichiers RTI :
-        </p>
-        <div style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; font-size:0.85rem;">
-          <a href="https://culturalheritageimaging.org/What_We_Offer/Downloads/RTIViewer/" target="_blank" style="color:var(--ocre); text-decoration:underline;">RTIViewer (Windows/Mac)</a>
-          <a href="https://vcg.isti.cnr.it/relight/" target="_blank" style="color:var(--ocre); text-decoration:underline;">RelightLab (Windows/Linux/Mac)</a>
-        </div>
-      </div>
-
+      <p class="meta-line" style="margin-top:1rem;">RTIViewer et RelightLab sont gratuits (culturalheritageimaging.org / cnr-isti-vclab/relight).</p>
     </div>
   </section>
-  <!-- ============================================================ -->
+
+
 
 </main>
 
