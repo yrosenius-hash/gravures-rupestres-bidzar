@@ -33,7 +33,7 @@
   <section class="section">
     <div class="section-inner">
       <p class="eyebrow">Protocole RTI — étapes réelles du terrain</p>
-      <h2>Du premier essai à la reprise de neuf dalles sur dix</h2>
+      <h2>Mêmes images, deux logiciels, deux résultats opposés</h2>
       <div class="etapes">
         <div class="etape">
           <div>
@@ -49,20 +49,32 @@
         </div>
         <div class="etape">
           <div>
-            <h3>Constat : lumière diffuse en extérieur</h3>
-            <p>L'éclairage LED du smartphone, diffus en conditions ambiantes extérieures, n'a pas produit de reflet spéculaire net sur la sphère — donnée indispensable au calcul de la direction de la lumière.</p>
+            <h3>Premier traitement sous RelightLab : succès partiel</h3>
+            <p>Seule la dalle n°03 a produit un rendu RTI exploitable. Les neuf autres ont donné un résultat sombre et inutilisable, attribué à une non-détection de la sphère de calibration.</p>
           </div>
         </div>
         <div class="etape">
           <div>
-            <h3>Reprise de neuf dalles sur dix</h3>
-            <p>Nouvelle série de prises avec une lumière directionnelle contrôlée, pour obtenir des reflets exploitables.</p>
+            <h3>Changement de logiciel : succès sous RTIBuilder</h3>
+            <p>Les mêmes images, sans aucune nouvelle prise de vue sur le terrain, traitées cette fois avec RTIBuilder (une version antérieure du même type d'outil), ont produit un fichier RTI exploitable pour les dix dalles.</p>
           </div>
         </div>
         <div class="etape">
           <div>
-            <h3>Traitement sous RelightLab</h3>
-            <p>Calcul du modèle de réflectance à partir des prises corrigées, production du fichier RTI consultable.</p>
+            <h3>Anomalie dalle n°06 : suppression plutôt que rotation</h3>
+            <p>Certaines photos de la série avaient été enregistrées en paysage plutôt qu'en portrait. Réorienter ces images par rotation modifiait leurs dimensions ; elles ont donc été retirées de la série plutôt que corrigées.</p>
+          </div>
+        </div>
+        <div class="etape">
+          <div>
+            <h3>Anomalie dalle n°05 : tailles d'image incohérentes</h3>
+            <p>Cas plus complexe : les photos de cette série se sont retrouvées de dimensions différentes entre elles. Malgré les traitements appliqués, le rendu RTI final reste de qualité médiocre pour cette dalle — conservée malgré tout sur le site.</p>
+          </div>
+        </div>
+        <div class="etape">
+          <div>
+            <h3>Conversion au format web sous RelightLab</h3>
+            <p>Les dix fichiers .rti produits par RTIBuilder ont ensuite été convertis, toujours sous RelightLab, en un format web (un fichier .json accompagné de quatre images .jpg par dalle). Ce format web s'ouvre dans RelightLab, tandis que le fichier .rti d'origine reste consultable dans RTIViewer — RelightLab offrant, en pratique, un rendu visuellement supérieur à RTIViewer.</p>
           </div>
         </div>
       </div>
@@ -71,9 +83,17 @@
 
   <section class="section dalle">
     <div class="section-inner">
-      <p class="eyebrow">Ce que ce constat apporte</p>
-      <h2>La tension lumière diffuse / lumière directionnelle comme résultat scientifique</h2>
-      <p class="lede">Plutôt qu'un simple incident technique, cette reprise documente une contrainte méthodologique transférable à d'autres campagnes RTI menées en extérieur avec des moyens limités.</p>
+      <p class="eyebrow">Ce que ces constats apportent</p>
+      <h2>Deux contraintes transférables à d'autres campagnes RTI frugales</h2>
+      <p class="lede">Premier constat : un même jeu d'images peut échouer dans un logiciel et réussir dans un autre — le choix de l'outil de traitement pèse autant que le protocole de capture lui-même. Second constat : verrouiller la rotation de l'écran avant une série de prises à main levée reste nécessaire, mais ne suffit pas toujours — des dimensions d'image incohérentes dans une même série peuvent obliger à supprimer des prises, ou dégrader durablement la qualité du rendu final.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="eyebrow">Visualisation en ligne</p>
+      <h2>Un visualiseur web intégré, tenté sans succès stable</h2>
+      <p class="lede">Deux bibliothèques JavaScript (OpenLIME, puis RelightViewer) ont été testées pour afficher les fichiers RTI directement dans le navigateur, sans aboutir à un résultat fiable. Le site propose donc le téléchargement direct des fichiers RTI plutôt qu'un rendu interactif en ligne.</p>
     </div>
   </section>
 
@@ -81,7 +101,32 @@
     <div class="section-inner">
       <p class="eyebrow">Photogrammétrie</p>
       <h2>Reconstitution volumique des dalles</h2>
-      <p>Section à développer : nombre de prises par dalle, logiciel de traitement, paramètres retenus.</p>
+      <div class="etapes">
+        <div class="etape">
+          <div>
+            <h3>Capture à main levée</h3>
+            <p>Série de photographies prises au smartphone autour de chaque dalle, via l'application KIRI Engine (mode Photo Scan) — aucun matériel de studio, cohérent avec l'approche frugale du protocole.</p>
+          </div>
+        </div>
+        <div class="etape">
+          <div>
+            <h3>Reconstruction brute</h3>
+            <p>Le modèle généré inclut initialement la dalle et son environnement immédiat (terre, végétation), puisque la capture couvre toute la scène photographiée.</p>
+          </div>
+        </div>
+        <div class="etape">
+          <div>
+            <h3>Rognage en quatre passes</h3>
+            <p>Isolation de la dalle par recadrage successif sur les axes Y et Z (deux côtés par axe), avec comblement automatique des petits trous laissés par l'opération (option "Fill Holes").</p>
+          </div>
+        </div>
+        <div class="etape">
+          <div>
+            <h3>Export et intégration directe</h3>
+            <p>Modèles exportés au format .glb et intégrés directement sur le site via la balise <code>model-viewer</code>, sans dépendre d'une plateforme tierce (Sketchfab, notamment, a été écarté pour rester indépendant d'Epic Games).</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
