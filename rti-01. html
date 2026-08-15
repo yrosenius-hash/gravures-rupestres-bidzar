@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RTI - Dalle 01 | Bidzar</title>
+
+    <!-- OpenLIME -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/skin.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/light.css">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            text-align: center;
+            padding: 18px;
+            background: #1b1b1b;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        header p {
+            margin: 6px 0 0;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        #viewer {
+            width: 100%;
+            height: 70vh;
+            min-height: 450px;
+            background: #222;
+        }
+
+        .info {
+            text-align: center;
+            padding: 20px;
+            background: #181818;
+        }
+
+        .info h2 {
+            margin-top: 0;
+        }
+
+        .info p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .retour {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 18px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 600px) {
+
+            #viewer {
+                height: 65vh;
+                min-height: 400px;
+            }
+
+            header h1 {
+                font-size: 19px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>
+        Gravures rupestres de Bidzar
+    </h1>
+
+    <p>
+        Dalle 01 — Visualisation RTI
+    </p>
+
+</header>
+
+
+<div id="viewer"></div>
+
+
+<div class="info">
+
+    <h2>
+        Explorer la gravure en RTI
+    </h2>
+
+    <p>
+        Déplacez la lumière sur la surface de la gravure
+        pour observer les détails du relief.
+    </p>
+
+    <p>
+        Vous pouvez également zoomer et déplacer l'image.
+    </p>
+
+    <a class="retour" href="galerie.html">
+        ← Retour à la galerie
+    </a>
+
+</div>
+
+
+<!-- OpenLIME -->
+
+<script src="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/js/openlime.min.js">
+</script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /*
+     * Création du visualiseur
+     */
+
+    const viewer = new OpenLIME.Viewer("viewer", {
+
+        prefetchBorder: 1,
+
+        layout: "basic"
+
+    });
+
+
+    /*
+     * Chargement de la RTI
+     *
+     * Le fichier info.json se trouve ici :
+     *
+     * rti/dalle-01/info.json
+     */
+
+    const rtiLayer = new OpenLIME.Layer({
+
+        id: "dalle-01",
+
+        type: "rti",
+
+        url: "rti/dalle-01/info.json",
+
+        layout: "image"
+
+    });
+
+
+    /*
+     * Ajout de la RTI au visualiseur
+     */
+
+    viewer.addLayer("dalle-01", rtiLayer);
+
+
+    /*
+     * Contrôles de zoom et déplacement
+     */
+
+    const controller =
+        new OpenLIME.ControllerPanZoom();
+
+    viewer.addController(controller);
+
+
+});
+
+</script>
+
+
+</body>
+
+</html>
