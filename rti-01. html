@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         type: "rti",
 
-        url: "rti/dalle-01/info.json",
+        url: 'rti/dalle-01/info.json',
 
         layout: "image"
 
