@@ -1,14 +1,17 @@
-html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dalle n°01 — CONUVAGRUB</title>
 <link rel="stylesheet" href="../style.css">
-<!-- Intégration des fichiers CSS et JS d'OpenLIME pour la RTI interactive -->
+
+<!-- Styles OpenLIME pour la gestion du canevas interactif -->
 <link rel="stylesheet" href="https://jsdelivr.net">
+
+<!-- Scripts de rendu : OpenLIME + Chargement sécurisé du lecteur 3D de Google -->
 <script src="https://jsdelivr.net"></script>
-<script type="module" src="https://googleapis.com"></script>
+<script async src="https://googleapis.com"></script>
 </head>
 <body>
 
@@ -48,7 +51,7 @@ html<!DOCTYPE html>
     <div class="section-inner">
       <p class="eyebrow">Modèle 3D — photogrammétrie</p>
       <div style="position:relative;">
-        <model-viewer id="mv-01" class="modele-3d" style="aspect-ratio:4/3;" src="../dalle-01.glb" alt="Dalle gravée n°01, Bidzar" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
+        <model-viewer id="mv-01" class="modele-3d" style="aspect-ratio:4/3; width:100%; display:block;" src="../dalle-01.glb" alt="Dalle gravée n°01, Bidzar" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
         <button onclick="document.getElementById('mv-01').requestFullscreen()" style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer;">Plein écran ⤢</button>
       </div>
     </div>
@@ -59,7 +62,7 @@ html<!DOCTYPE html>
       <p class="eyebrow">Imagerie RTI</p>
       <p class="lede">Glissez votre souris ou votre doigt sur l'image pour déplacer la source de lumière et révéler les gravures rupestres de Bidzar.</p>
       
-      <!-- Espace d'affichage créé pour la visionneuse RTI OpenLIME -->
+      <!-- Zone de rendu RTI stabilisée -->
       <div id="visualiseur-rti" style="width:100%; aspect-ratio:4/3; background:#1a1a1a; border:1px solid rgba(43,39,36,0.14); position:relative; overflow:hidden; margin-top:1.5rem;"></div>
 
       <div style="border:1px solid rgba(237,228,211,0.25); background:rgba(237,228,211,0.04); padding:1.5rem; margin-top:1.5rem;">
@@ -81,14 +84,24 @@ html<!DOCTYPE html>
   </div>
 </footer>
 
-<!-- Script d'activation automatique d'OpenLIME lié au dossier de la racine -->
+<!-- Script de traitement OpenLIME avec écouteur d'interface -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const viewer = new OpenLime.Viewer('#visualiseur-rti');
-    const rtiLayer = new OpenLime.LayerRTI({
-        url: "../rti-01/" 
-    });
-    viewer.addLayer(rtiLayer);
+  window.addEventListener("load", function() {
+    try {
+      // 1. Initialisation de la vue principale
+      const viewer = new OpenLime.Viewer('#visualiseur-rti');
+      
+      // 2. Déclaration et ajout de la couche RTI (cherche info.json dans la racine)
+      const rtiLayer = viewer.addLayer('rti', {
+          url: "../rti-01/info.json"
+      });
+      
+      // 3. Activation de l'UI de base (indispensable pour capter le pointeur souris/doigt)
+      const ui = new OpenLime.UIBasic(viewer);
+      
+    } catch (error) {
+      console.error("Erreur de chargement OpenLIME :", error);
+    }
   });
 </script>
 
