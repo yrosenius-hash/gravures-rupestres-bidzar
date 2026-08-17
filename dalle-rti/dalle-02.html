@@ -69,12 +69,15 @@
 
     <nav class="site-nav">
       <a href="../index.html">Accueil</a>
+
       <a href="../musee-virtuel.html" aria-current="page">
         Musée virtuel
       </a>
+
       <a href="../methodologie.html">
         Méthodologie numérique frugale
       </a>
+
       <a href="../contact.html">
         Contact &amp; enquête
       </a>
@@ -142,11 +145,11 @@
 
         <strong>Jeu de données OpenLIME</strong><br><br>
 
-        <code>rti-02/info.json</code><br>
-        <code>rti-02/plane_0.jpg</code><br>
-        <code>rti-02/plane_1.jpg</code><br>
-        <code>rti-02/plane_2.jpg</code><br>
-        <code>rti-02/plane_3.jpg</code>
+        <code>rti-2/info.json</code><br>
+        <code>rti-2/plane_0.jpg</code><br>
+        <code>rti-2/plane_1.jpg</code><br>
+        <code>rti-2/plane_2.jpg</code><br>
+        <code>rti-2/plane_3.jpg</code>
 
         <br><br>
 
@@ -176,14 +179,6 @@
       </p>
 
       <div class="rti-downloads">
-
-        <!--
-          CONSERVÉS À PARTIR DES LIENS EXISTANTS
-          DE LA DALLE 02.
-          
-          Remplacer les deux URL ci-dessous par les URL
-          Release déjà présentes dans dalles/dalle-02.html.
-        -->
 
         <a
           class="bouton"
@@ -249,22 +244,22 @@ document.addEventListener("DOMContentLoaded", function () {
     /*
      * Couche RTI
      *
-     * OpenLIME lit directement :
+     * Les données sont dans :
      *
-     * ../rti-02/info.json
+     * ../rti-2/
      *
-     * puis les plane_*.jpg indiqués par
-     * la structure du jeu RTI.
+     * Le fichier info.json indique à OpenLIME
+     * comment interpréter les fichiers plane_*.jpg.
      */
     const rti = new OpenLIME.Layer({
       type: "rti",
-      url: "../rti-02/info.json",
+      url: "../rti-2/info.json",
       layout: "image",
       visible: true
     });
 
 
-    lime.canvas.addLayer("rti-02", rti);
+    lime.canvas.addLayer("rti-2", rti);
 
 
     /*
