@@ -11,11 +11,11 @@
 <!-- OpenLIME 1.2.6 -->
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/skin.css"
+  href="https://jsdelivr.net"
 >
 
 <script
-  src="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/js/openlime.min.js">
+  src="https://jsdelivr.net">
 </script>
 
 <style>
@@ -267,7 +267,7 @@
 
       <a
         class="bouton"
-        href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
+        href="https://github.com"
         target="_blank"
         rel="noopener"
       >
@@ -277,7 +277,7 @@
 
       <a
         class="bouton"
-        href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
+        href="https://github.com"
         target="_blank"
         rel="noopener"
       >
@@ -323,116 +323,44 @@
 
 
 <script>
-
 /*
  * ==========================================================
- * OPENLIME — RTI DALLE 02
- *
- * Fichier actuel :
- *
- * dalle-rti/dalle-02.html
- *
- * Données :
- *
- * ../rti-2/info.json
- *
+ * OPENLIME — RTI DALLE 02 (CORRIGÉ)
  * ==========================================================
- */
-
-
-/*
- * Configuration OpenLIME
- *
- * Cette structure reprend directement le modèle
- * fourni pour le format JSON.
  */
 
 const config = {
-
     canvas: {
-
         rasters: [
-
             {
-
                 id: "rti_layer",
-
                 name: "RTI — Dalle 02",
-
                 url: "../rti-2/info.json",
-
-                layout: "image"
-
+                layout: "image",
+                type: "rti" // Correction : indique le type RTI pour créer le bon objet de calque
             }
-
         ]
-
+    },
+    ui: {
+        components: ["LightControl"] // Correction : injecte les modules d'écoute et d'interaction de lumière
     }
-
 };
 
-
-/*
- * Conteneur du visualiseur
- */
-
-const container =
-    document.getElementById(
-        "openlime"
-    );
-
-
-/*
- * Initialisation OpenLIME
- */
-
-const viewer =
-    new OpenLIME.Viewer(
-        container,
-        config
-    );
-
-
-/*
- * Chargement du jeu RTI
- */
+const container = document.getElementById("openlime");
+const viewer = new OpenLIME.Viewer(container, config);
 
 viewer.load()
-
     .then(() => {
-
-        console.log(
-            "OpenLIME chargé avec succès avec le RTI de la dalle 02."
-        );
-
-
-        document.getElementById(
-            "rti-status"
-        ).textContent =
-            "RTI chargé. Le visualiseur est prêt.";
-
-
+        console.log("OpenLIME chargé avec succès avec le RTI de la dalle 02.");
+        document.getElementById("rti-status").textContent = 
+            "RTI chargé. Maintenez le clic ou glissez le doigt pour modifier l'éclairage.";
     })
-
     .catch((err) => {
-
-        console.error(
-            "Erreur lors du chargement des données RTI :",
-            err
-        );
-
-
-        document.getElementById(
-            "rti-status"
-        ).textContent =
-            "Erreur lors du chargement du RTI : " +
-            err.message;
-
+        console.error("Erreur lors du chargement des données RTI :", err);
+        document.getElementById("rti-status").textContent = 
+            "Erreur lors du chargement du RTI : " + err.message;
     });
-
-
 </script>
-
 
 </body>
 </html>
