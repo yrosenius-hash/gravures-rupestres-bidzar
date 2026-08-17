@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="../style.css">
 
-<!-- OpenLIME -->
+<!-- OpenLIME 1.2.6 -->
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/skin.css"
@@ -27,7 +27,7 @@
   position: relative;
   background: #181614;
   overflow: hidden;
-  border: 1px solid rgba(43,39,36,.18);
+  border: 1px solid rgba(43, 39, 36, 0.18);
 }
 
 #openlime {
@@ -38,7 +38,7 @@
 .rti-status {
   margin-top: 1rem;
   padding: .75rem 1rem;
-  border: 1px solid rgba(43,39,36,.14);
+  border: 1px solid rgba(43, 39, 36, .14);
   font-family: var(--font-mono);
   font-size: .75rem;
   color: var(--ardoise);
@@ -51,18 +51,22 @@
   margin-top: 1.5rem;
 }
 
-@media (max-width:640px) {
+@media (max-width: 640px) {
+
   .rti-wrap {
     height: 65vh;
     min-height: 380px;
   }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
+
 
 <header class="site-header">
 
@@ -78,7 +82,10 @@
         Accueil
       </a>
 
-      <a href="../musee-virtuel.html" aria-current="page">
+      <a
+        href="../musee-virtuel.html"
+        aria-current="page"
+      >
         Musée virtuel
       </a>
 
@@ -99,147 +106,194 @@
 
 <main>
 
-  <section class="section dalle dalle--auto">
 
-    <div class="section-inner">
+<section class="section dalle dalle--auto">
 
-      <p class="eyebrow">
+  <div class="section-inner">
 
-        <a href="../rti.html" style="color:var(--ocre);">
-          &larr; Retour aux RTI
-        </a>
+    <p class="eyebrow">
 
-      </p>
-
-      <h1>Dalle n°02 — RTI</h1>
-
-      <p class="lede">
-
-        Imagerie par transformation de réflectance.
-        Déplacez la lumière sur la surface pour révéler
-        les gravures et les variations du relief.
-
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-inner">
-
-      <p class="eyebrow">
-        Visualisation interactive
-      </p>
-
-      <h2>Explorer la gravure</h2>
-
-      <div class="rti-wrap">
-
-        <div id="openlime"></div>
-
-      </div>
-
-      <div
-        id="rti-status"
-        class="rti-status"
+      <a
+        href="../rti.html"
+        style="color:var(--ocre);"
       >
-        Chargement du modèle RTI…
+        &larr; Retour aux RTI
+      </a>
 
-      </div>
-
-    </div>
-
-  </section>
+    </p>
 
 
-  <section class="section">
+    <h1>
+      Dalle n°02 — RTI
+    </h1>
 
-    <div class="section-inner">
 
-      <p class="eyebrow">
-        Données
-      </p>
+    <p class="lede">
 
-      <h2>Documentation RTI</h2>
+      Imagerie par transformation de réflectance.
+      Déplacez la lumière sur la surface pour révéler
+      les gravures et les variations du relief.
 
-      <p>
-        Le visualiseur utilise directement le jeu de données
-        RTI de la dalle n°02.
-      </p>
+    </p>
 
-      <div class="rti-status">
+  </div>
 
-        <strong>Jeu de données OpenLIME</strong>
+</section>
 
-        <br><br>
 
-        <code>rti-2/info.json</code><br>
-        <code>rti-2/plane_0.jpg</code><br>
-        <code>rti-2/plane_1.jpg</code><br>
-        <code>rti-2/plane_2.jpg</code><br>
-        <code>rti-2/plane_3.jpg</code>
 
-        <br><br>
+<section class="section">
 
-        Résolution : 3018 × 3254 px<br>
-        Format : JPEG<br>
-        Modèle : HSH<br>
-        Plans : 12<br>
-        Espace colorimétrique : RGB
+  <div class="section-inner">
 
-      </div>
+    <p class="eyebrow">
+      Visualisation interactive
+    </p>
+
+
+    <h2>
+      Explorer la gravure
+    </h2>
+
+
+    <div class="rti-wrap">
+
+      <div id="openlime"></div>
 
     </div>
 
-  </section>
+
+    <div
+      id="rti-status"
+      class="rti-status"
+    >
+      Chargement du modèle RTI…
+    </div>
+
+  </div>
+
+</section>
 
 
-  <section class="section">
 
-    <div class="section-inner">
+<section class="section">
 
-      <p class="eyebrow">
-        Conservation numérique
-      </p>
+  <div class="section-inner">
 
-      <h2>Téléchargement</h2>
+    <p class="eyebrow">
+      Données
+    </p>
 
-      <p>
-        Les données originales restent disponibles pour une
-        utilisation locale avec les logiciels de visualisation
-        et de traitement RTI.
-      </p>
 
-      <div class="rti-downloads">
+    <h2>
+      Documentation RTI
+    </h2>
 
-        <a
-          class="bouton"
-          href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
-          target="_blank"
-          rel="noopener"
-        >
-          Télécharger le .rti
-        </a>
 
-        <a
-          class="bouton"
-          href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
-          target="_blank"
-          rel="noopener"
-        >
-          Télécharger pour RelightLab
-        </a>
+    <p>
 
-      </div>
+      Le visualiseur utilise directement les données
+      RTI produites pour la dalle n°02.
+
+    </p>
+
+
+    <div class="rti-status">
+
+      <strong>
+        Jeu de données OpenLIME
+      </strong>
+
+      <br><br>
+
+
+      <code>rti-2/info.json</code><br>
+
+      <code>rti-2/plane_0.jpg</code><br>
+
+      <code>rti-2/plane_1.jpg</code><br>
+
+      <code>rti-2/plane_2.jpg</code><br>
+
+      <code>rti-2/plane_3.jpg</code>
+
+
+      <br><br>
+
+
+      Résolution : 3018 × 3254 px<br>
+
+      Format : JPEG<br>
+
+      Modèle : HSH<br>
+
+      Plans : 12<br>
+
+      Espace colorimétrique : RGB
 
     </div>
 
-  </section>
+  </div>
+
+</section>
+
+
+
+<section class="section">
+
+  <div class="section-inner">
+
+    <p class="eyebrow">
+      Conservation numérique
+    </p>
+
+
+    <h2>
+      Téléchargement
+    </h2>
+
+
+    <p>
+
+      Les données originales restent disponibles pour une
+      utilisation locale avec les logiciels de visualisation
+      et de traitement RTI.
+
+    </p>
+
+
+    <div class="rti-downloads">
+
+
+      <a
+        class="bouton"
+        href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
+        target="_blank"
+        rel="noopener"
+      >
+        Télécharger le .rti
+      </a>
+
+
+      <a
+        class="bouton"
+        href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
+        target="_blank"
+        rel="noopener"
+      >
+        Télécharger pour RelightLab
+      </a>
+
+
+    </div>
+
+  </div>
+
+</section>
+
 
 </main>
+
 
 
 <footer class="site-footer">
@@ -249,6 +303,7 @@
     <span>
       CONUVAGRUB — Bidzar, Cameroun
     </span>
+
 
     <span>
 
@@ -266,124 +321,118 @@
 </footer>
 
 
+
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  const status =
-    document.getElementById("rti-status");
-
-  try {
-
-    /*
-     * =====================================================
-     * OPENLIME — VIEWER
-     * =====================================================
-     */
-
-    const lime =
-      new OpenLIME.Viewer(
-        "#openlime",
-        {
-          background: "black"
-        }
-      );
+/*
+ * ==========================================================
+ * OPENLIME — RTI DALLE 02
+ *
+ * Fichier actuel :
+ *
+ * dalle-rti/dalle-02.html
+ *
+ * Données :
+ *
+ * ../rti-2/info.json
+ *
+ * ==========================================================
+ */
 
 
-    /*
-     * =====================================================
-     * RTI HSH
-     *
-     * Le fichier info.json contient :
-     *
-     * type     : hsh
-     * nplanes  : 12
-     * scale
-     * bias
-     *
-     * Les quatre images sont les plans du modèle.
-     * =====================================================
-     */
+/*
+ * Configuration OpenLIME
+ *
+ * Cette structure reprend directement le modèle
+ * fourni pour le format JSON.
+ */
 
-    const layer =
-      new OpenLIME.Layer({
+const config = {
 
-        layout: "tarzoom",
+    canvas: {
 
-        type: "rti",
+        rasters: [
 
-        url: "../rti-2/info.json",
+            {
 
-        normals: false
+                id: "rti_layer",
 
-      });
+                name: "RTI — Dalle 02",
+
+                url: "../rti-2/info.json",
+
+                layout: "image"
+
+            }
+
+        ]
+
+    }
+
+};
 
 
-    /*
-     * Ajout de la couche RTI
-     */
+/*
+ * Conteneur du visualiseur
+ */
 
-    lime.canvas.addLayer(
-      "RTI — Dalle 02",
-      layer
+const container =
+    document.getElementById(
+        "openlime"
     );
 
 
-    /*
-     * Interface OpenLIME
-     *
-     * Elle fournit notamment les contrôles de
-     * navigation, zoom et éclairage.
-     */
+/*
+ * Initialisation OpenLIME
+ */
 
-    const ui =
-      new OpenLIME.UIBasic(
-        lime,
-        {
-          skin: "light"
-        }
-      );
-
-
-    /*
-     * Information utilisateur
-     */
-
-    status.textContent =
-      "RTI chargé — utilisez la souris pour déplacer la lumière et la molette pour zoomer.";
-
-
-    /*
-     * Gestion des erreurs de chargement
-     */
-
-    layer.addEventListener(
-      "update",
-      function () {
-
-        status.textContent =
-          "RTI actif — lumière interactive.";
-
-      }
+const viewer =
+    new OpenLIME.Viewer(
+        container,
+        config
     );
 
 
-  } catch (error) {
+/*
+ * Chargement du jeu RTI
+ */
 
-    console.error(
-      "OpenLIME RTI — erreur :",
-      error
-    );
+viewer.load()
 
-    status.textContent =
-      "Erreur OpenLIME : " +
-      error.message;
+    .then(() => {
 
-  }
+        console.log(
+            "OpenLIME chargé avec succès avec le RTI de la dalle 02."
+        );
 
-});
+
+        document.getElementById(
+            "rti-status"
+        ).textContent =
+            "RTI chargé. Le visualiseur est prêt.";
+
+
+    })
+
+    .catch((err) => {
+
+        console.error(
+            "Erreur lors du chargement des données RTI :",
+            err
+        );
+
+
+        document.getElementById(
+            "rti-status"
+        ).textContent =
+            "Erreur lors du chargement du RTI : " +
+            err.message;
+
+    });
+
 
 </script>
+
 
 </body>
 </html>
