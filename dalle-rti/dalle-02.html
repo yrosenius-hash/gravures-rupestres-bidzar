@@ -325,10 +325,11 @@
 <script>
 /*
  * ==========================================================
- * OPENLIME — RTI DALLE 02 (CORRIGÉ)
+ * OPENLIME 1.2.6 — RTI DALLE 02 (CORRECTION UNCAUGHT TYPEERROR)
  * ==========================================================
  */
 
+// 1. Définition de la configuration standard
 const config = {
     canvas: {
         rasters: [
@@ -337,29 +338,38 @@ const config = {
                 name: "RTI — Dalle 02",
                 url: "../rti-2/info.json",
                 layout: "image",
-                type: "rti" // Correction : indique le type RTI pour créer le bon objet de calque
+                type: "rti"
             }
         ]
     },
     ui: {
-        components: ["LightControl"] // Correction : injecte les modules d'écoute et d'interaction de lumière
+        components: ["LightControl"]
     }
 };
 
-const container = document.getElementById("openlime");
-const viewer = new OpenLIME.Viewer(container, config);
+try {
+    const container = document.getElementById("openlime");
+    
+    // 2. Initialisation et chargement direct (API stable OpenLIME v1.2.x)
+    const viewer = new OpenLIME.Viewer(container, config);
 
-viewer.load()
-    .then(() => {
-        console.log("OpenLIME chargé avec succès avec le RTI de la dalle 02.");
-        document.getElementById("rti-status").textContent = 
-            "RTI chargé. Maintenez le clic ou glissez le doigt pour modifier l'éclairage.";
-    })
-    .catch((err) => {
-        console.error("Erreur lors du chargement des données RTI :", err);
-        document.getElementById("rti-status").textContent = 
-            "Erreur lors du chargement du RTI : " + err.message;
-    });
+    // 3. Mise à jour du message d'état d'affichage
+    setTimeout(() => {
+        const statusEl = document.getElementById("rti-status");
+        if (statusEl) {
+            statusEl.textContent = "RTI chargé. Maintenez le clic enfoncé ou glissez votre doigt sur la surface pour explorer la gravure.";
+        }
+    }, 1200);
+
+    console.log("OpenLIME initialisé avec succès en mode v1.2.6.");
+
+} catch (err) {
+    console.error("Erreur d'initialisation OpenLIME :", err);
+    const statusEl = document.getElementById("rti-status");
+    if (statusEl) {
+        statusEl.textContent = "Erreur d'initialisation : " + err.message;
+    }
+}
 </script>
 
 </body>
