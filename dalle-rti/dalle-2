@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RTI — Dalle n°02 — CONUVAGRUB</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<!-- OpenLIME 1.2.6 -->
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/skin.css">
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/css/light.css">
+
+<script src="https://cdn.jsdelivr.net/npm/openlime@1.2.6/dist/js/openlime.min.js"></script>
+
+<style>
+  .rti-wrap {
+    width: 100%;
+    height: min(78vh, 820px);
+    min-height: 480px;
+    position: relative;
+    background: #181614;
+    overflow: hidden;
+    border: 1px solid rgba(43, 39, 36, 0.18);
+  }
+
+  #openlime {
+    width: 100%;
+    height: 100%;
+  }
+
+  .rti-status {
+    margin-top: 1rem;
+    padding: .75rem 1rem;
+    border: 1px solid rgba(43, 39, 36, .14);
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    color: var(--ardoise);
+  }
+
+  .rti-downloads {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .rti-wrap {
+      height: 65vh;
+      min-height: 380px;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+
+    <a class="site-mark" href="../index.html">
+      CONUVAGRUB <span>· Bidzar</span>
+    </a>
+
+    <nav class="site-nav">
+      <a href="../index.html">Accueil</a>
+      <a href="../musee-virtuel.html" aria-current="page">
+        Musée virtuel
+      </a>
+      <a href="../methodologie.html">
+        Méthodologie numérique frugale
+      </a>
+      <a href="../contact.html">
+        Contact &amp; enquête
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main>
+
+  <section class="section dalle dalle--auto">
+    <div class="section-inner">
+
+      <p class="eyebrow">
+        <a href="../rti.html" style="color:var(--ocre);">
+          &larr; Retour aux RTI
+        </a>
+      </p>
+
+      <h1>Dalle n°02 — RTI</h1>
+
+      <p class="lede">
+        Imagerie par transformation de réflectance.
+        Déplacez la lumière sur la surface pour révéler
+        les gravures et les variations du relief.
+      </p>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="section-inner">
+
+      <p class="eyebrow">Visualisation interactive</p>
+
+      <h2>Explorer la gravure</h2>
+
+      <div class="rti-wrap">
+        <div id="openlime"></div>
+      </div>
+
+      <div id="rti-status" class="rti-status">
+        Chargement du modèle RTI…
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="section-inner">
+
+      <p class="eyebrow">Données</p>
+
+      <h2>Documentation RTI</h2>
+
+      <p>
+        Le visualiseur utilise directement les données RTI
+        produites pour la dalle n°02.
+      </p>
+
+      <div class="rti-status">
+
+        <strong>Jeu de données OpenLIME</strong><br><br>
+
+        <code>rti-02/info.json</code><br>
+        <code>rti-02/plane_0.jpg</code><br>
+        <code>rti-02/plane_1.jpg</code><br>
+        <code>rti-02/plane_2.jpg</code><br>
+        <code>rti-02/plane_3.jpg</code>
+
+        <br><br>
+
+        Résolution : 3018 × 3254 px<br>
+        Format : JPEG<br>
+        Modèle : HSH<br>
+        Plans : 12<br>
+        Espace colorimétrique : RGB
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="section-inner">
+
+      <p class="eyebrow">Conservation numérique</p>
+
+      <h2>Téléchargement</h2>
+
+      <p>
+        Les données originales restent disponibles pour une
+        utilisation locale avec les logiciels de visualisation
+        et de traitement RTI.
+      </p>
+
+      <div class="rti-downloads">
+
+        <!--
+          CONSERVÉS À PARTIR DES LIENS EXISTANTS
+          DE LA DALLE 02.
+          
+          Remplacer les deux URL ci-dessous par les URL
+          Release déjà présentes dans dalles/dalle-02.html.
+        -->
+
+        <a
+          class="bouton"
+          href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
+          target="_blank"
+          rel="noopener"
+        >
+          Télécharger le .rti
+        </a>
+
+        <a
+          class="bouton"
+          href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases"
+          target="_blank"
+          rel="noopener"
+        >
+          Télécharger pour RelightLab
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+
+    <span>
+      CONUVAGRUB — Bidzar, Cameroun
+    </span>
+
+    <span>
+      <a href="../rti.html" style="color:inherit;">
+        &larr; Retour aux RTI
+      </a>
+    </span>
+
+  </div>
+</footer>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const status = document.getElementById("rti-status");
+
+  try {
+
+    /*
+     * Viewer OpenLIME
+     */
+    const lime = new OpenLIME.Viewer("#openlime", {
+      background: "black",
+      canvas: {
+        preserveDrawingBuffer: true
+      }
+    });
+
+
+    /*
+     * Couche RTI
+     *
+     * OpenLIME lit directement :
+     *
+     * ../rti-02/info.json
+     *
+     * puis les plane_*.jpg indiqués par
+     * la structure du jeu RTI.
+     */
+    const rti = new OpenLIME.Layer({
+      type: "rti",
+      url: "../rti-02/info.json",
+      layout: "image",
+      visible: true
+    });
+
+
+    lime.canvas.addLayer("rti-02", rti);
+
+
+    /*
+     * Contrôle de navigation / zoom
+     */
+    const controller =
+      new OpenLIME.ControllerPanZoom();
+
+    lime.canvas.addController(controller);
+
+
+    /*
+     * Interface OpenLIME
+     */
+    const ui =
+      new OpenLIME.UIBasic(lime, {
+        skin: "light"
+      });
+
+
+    /*
+     * Premier rendu
+     */
+    lime.draw();
+
+
+    /*
+     * État de chargement
+     */
+    rti.addEventListener("ready", function () {
+
+      status.textContent =
+        "RTI chargé. Déplacez le pointeur sur l'image pour modifier la direction de la lumière.";
+
+    });
+
+
+    rti.addEventListener("update", function () {
+
+      status.textContent =
+        "RTI actif — lumière interactive.";
+
+    });
+
+
+  } catch (error) {
+
+    console.error("Erreur OpenLIME :", error);
+
+    status.textContent =
+      "Erreur lors du chargement du RTI. Consultez la console du navigateur.";
+
+  }
+
+});
+</script>
+
+</body>
+</html>
