@@ -31,7 +31,6 @@
       background: #111;
       border: 1px solid rgba(43, 39, 36, 0.2);
       isolation: isolate;
-      contain: layout paint size;
     }
 
     #visualiseur-rti {
@@ -179,7 +178,7 @@
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI — HSH</p>
       <p class="lede">
-        Déplace la souris ou ton doigt sur l’image pour modifier la lumière.
+        Déplace la souris sur l’image pour modifier la lumière.
       </p>
 
       <div id="rti-wrapper" class="rti-wrapper">
@@ -191,11 +190,6 @@
         <button id="plein-ecran-rti" type="button">RTI plein écran ⤢</button>
         <button id="recentrer-lumiere" type="button">Recentrer la lumière</button>
         <a href="../rti/dalle-01/info.json" target="_blank" rel="noopener">Ouvrir info.json</a>
-      </div>
-
-      <div style="border:1px solid rgba(237,228,211,0.25); background:rgba(237,228,211,0.04); padding:1.5rem; margin-top:1.5rem;">
-        <p class="meta-line">RTI HSH — 12 plans de coefficients — 4 fichiers JPG.</p>
-        <p class="meta-line" style="margin-top:0.8rem;">Le lecteur attend plane_0.jpg, plane_1.jpg, plane_2.jpg et plane_3.jpg.</p>
       </div>
     </div>
   </section>
@@ -249,9 +243,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const donnees = await reponse.json();
     if (donnees.type !== "hsh") throw new Error("type invalide.");
     if (donnees.nplanes !== 12) throw new Error("nplanes invalide.");
-    if (!Array.isArray(donnees.materials) || !donnees.materials.length) {
-      throw new Error("materials absent.");
-    }
 
     const viewer = new OpenLIME.Viewer("#visualiseur-rti", {
       background: "black"
@@ -285,13 +276,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     boutonLumiere.addEventListener("click", function () {
       if (typeof layer.setLight === "function") {
         layer.setLight([0.5, 0.5], 1000);
-      } else if (viewer.canvas && viewer.canvas.light) {
-        viewer.canvas.light = [0.5, 0.5];
-        resizeViewer();
       }
+      resizeViewer();
     });
 
-    setTimeout(cacherMessage, 2000);
+    setTimeout(cacherMessage, 1500);
   } catch (e) {
     console.error(e);
     afficherMessage("Le RTI n’a pas pu être chargé. Vérifie les fichiers et les chemins.");
