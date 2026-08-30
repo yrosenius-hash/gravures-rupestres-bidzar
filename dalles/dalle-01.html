@@ -42,19 +42,6 @@
       background: #111;
     }
 
-    #visualiseur-rti canvas {
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
-      max-width: none !important;
-      max-height: none !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      z-index: 1 !important;
-    }
-
     .rti-message {
       position: absolute;
       inset: 0;
@@ -110,6 +97,13 @@
       height: 100vh;
       margin: 0;
       border: 0;
+    }
+
+    @media (max-width: 700px) {
+      .rti-wrapper {
+        height: 70vh;
+        min-height: 320px;
+      }
     }
   </style>
 </head>
@@ -185,7 +179,7 @@
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI — HSH</p>
       <p class="lede">
-        Déplace la souris ou ton doigt sur l’image pour modifier l’éclairage.
+        Déplace la souris ou ton doigt sur l’image pour modifier la lumière.
       </p>
 
       <div id="rti-wrapper" class="rti-wrapper">
@@ -253,18 +247,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!reponse.ok) throw new Error("info.json introuvable.");
 
     const donnees = await reponse.json();
-
     if (donnees.type !== "hsh") throw new Error("type invalide.");
     if (donnees.nplanes !== 12) throw new Error("nplanes invalide.");
     if (!Array.isArray(donnees.materials) || !donnees.materials.length) {
       throw new Error("materials absent.");
     }
-
-    const fichiersJPG = ["plane_0.jpg", "plane_1.jpg", "plane_2.jpg", "plane_3.jpg"];
-    await Promise.all(fichiersJPG.map(async (nom) => {
-      const r = await fetch(dossierRTI + nom, { method: "HEAD", cache: "no-store" });
-      if (!r.ok) throw new Error(nom + " introuvable.");
-    }));
 
     const viewer = new OpenLIME.Viewer("#visualiseur-rti", {
       background: "black"
@@ -297,9 +284,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     boutonLumiere.addEventListener("click", function () {
       if (typeof layer.setLight === "function") {
-        layer.setLight([0, 0], 500);
-      } else if (layer.relight && typeof layer.relight.setLight === "function") {
-        layer.relight.setLight([0, 0], 500);
+        layer.setLight([0.5, 0.5], 1000);
+      } else if (viewer.canvas && viewer.canvas.light) {
+        viewer.canvas.light = [0.5, 0.5];
+        resizeViewer();
       }
     });
 
