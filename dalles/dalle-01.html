@@ -6,23 +6,19 @@
 
   <title>Dalle n°01 — CONUVAGRUB</title>
 
-  <!-- Feuille de style principale à la racine -->
+  <!-- Feuille de style du site située à la racine -->
   <link rel="stylesheet" href="../style.css">
 
-  <!-- Style OpenLIME officiel -->
-  <link rel="stylesheet"
-        href="https://unpkg.com/openlime@1.2.2/dist/css/lime.css">
-
-  <!-- Lecteur de modèle 3D -->
+  <!-- Lecteur officiel du modèle 3D -->
   <script type="module"
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
   </script>
 
-  <!-- Bibliothèque OpenLIME -->
-  <script src="https://unpkg.com/openlime@1.2.2/dist/js/openlime.min.js"></script>
+  <!-- OpenLIME -->
+  <script src="https://cdn.jsdelivr.net/npm/openlime@1.2.1/dist/js/openlime.min.js"></script>
 
   <style>
-    .rti-container {
+    .rti-wrapper {
       position: relative;
       width: 100%;
       height: min(70vh, 720px);
@@ -40,7 +36,7 @@
       height: 100%;
     }
 
-    .rti-status {
+    .rti-message {
       position: absolute;
       inset: 0;
       z-index: 10;
@@ -51,23 +47,22 @@
       color: #f1eadc;
       background: #1a1a1a;
       font-family: sans-serif;
-      font-size: 0.95rem;
       text-align: center;
     }
 
-    .rti-status[hidden] {
+    .rti-message[hidden] {
       display: none;
     }
 
-    .rti-buttons {
+    .rti-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
       margin-top: 1rem;
     }
 
-    .rti-buttons button,
-    .rti-buttons a {
+    .rti-actions button,
+    .rti-actions a {
       border: 0;
       padding: 0.6rem 0.85rem;
       color: #f1eadc;
@@ -77,8 +72,8 @@
       cursor: pointer;
     }
 
-    .rti-buttons button:hover,
-    .rti-buttons a:hover {
+    .rti-actions button:hover,
+    .rti-actions a:hover {
       opacity: 0.8;
     }
 
@@ -102,10 +97,11 @@
       cursor: pointer;
     }
 
-    .rti-container:fullscreen {
+    .rti-wrapper:fullscreen {
       width: 100vw;
       height: 100vh;
       margin: 0;
+      border: 0;
     }
   </style>
 </head>
@@ -203,23 +199,23 @@
   <section class="section dalle">
     <div class="section-inner">
 
-      <p class="eyebrow">Imagerie RTI</p>
+      <p class="eyebrow">Imagerie RTI — HSH</p>
 
       <p class="lede">
-        Déplace la souris ou ton doigt sur l’image pour déplacer la source lumineuse et révéler les gravures rupestres.
+        Déplace la souris ou ton doigt sur l’image afin de déplacer la source lumineuse et révéler les gravures.
       </p>
 
-      <div id="rti-container" class="rti-container">
+      <div id="rti-wrapper" class="rti-wrapper">
 
         <div id="visualiseur-rti"></div>
 
-        <div id="rti-status" class="rti-status">
-          Chargement de l’image RTI…
+        <div id="rti-message" class="rti-message">
+          Chargement de l’image RTI HSH…
         </div>
 
       </div>
 
-      <div class="rti-buttons">
+      <div class="rti-actions">
 
         <button id="plein-ecran-rti" type="button">
           RTI plein écran ⤢
@@ -240,11 +236,11 @@
       <div style="border:1px solid rgba(237,228,211,0.25); background:rgba(237,228,211,0.04); padding:1.5rem; margin-top:1.5rem;">
 
         <p class="meta-line">
-          Imagerie RTI de la dalle gravée n°01 — Bidzar, Cameroun.
+          RTI au format HSH — 12 plans de coefficients — Bidzar, Cameroun.
         </p>
 
         <p class="meta-line" style="margin-top:0.8rem;">
-          Les fichiers originaux peuvent être étudiés hors ligne avec RTIViewer ou RelightLab.
+          Cette visualisation utilise les quatre images JPG associées au fichier info.json.
         </p>
 
       </div>
@@ -273,8 +269,8 @@
 <script>
   document.addEventListener("DOMContentLoaded", async function () {
 
-    const rtiContainer = document.getElementById("rti-container");
-    const rtiStatus = document.getElementById("rti-status");
+    const rtiWrapper = document.getElementById("rti-wrapper");
+    const rtiMessage = document.getElementById("rti-message");
 
     const modele3D = document.getElementById("modele-3d");
 
@@ -283,26 +279,24 @@
     const boutonLumiere = document.getElementById("recentrer-lumiere");
 
     /*
-      Le fichier actuel est :
+      Le fichier HTML est dans :
       dalle/dalle-01.html
 
-      Les fichiers nécessaires sont à la racine :
-      ../dalle-01.jpg
-      ../dalle-01.glb
-      ../style.css
-
-      Le dossier RTI est :
+      Le dossier RTI est à la racine :
       rti/dalle-01/
+
+      Le chemin correct est donc :
+      ../rti/dalle-01/info.json
     */
     const cheminRTI = "../rti/dalle-01/info.json";
 
-    function afficherErreur(message) {
-      rtiStatus.hidden = false;
-      rtiStatus.textContent = message;
+    function afficherMessage(message) {
+      rtiMessage.hidden = false;
+      rtiMessage.textContent = message;
     }
 
     function cacherMessage() {
-      rtiStatus.hidden = true;
+      rtiMessage.hidden = true;
     }
 
     /*
@@ -319,12 +313,12 @@
     });
 
     /*
-      Plein écran du visualiseur RTI
+      Plein écran du RTI
     */
     boutonRTI.addEventListener("click", function () {
 
-      if (rtiContainer.requestFullscreen) {
-        rtiContainer.requestFullscreen();
+      if (rtiWrapper.requestFullscreen) {
+        rtiWrapper.requestFullscreen();
       } else {
         alert("Le plein écran RTI n’est pas disponible.");
       }
@@ -332,11 +326,11 @@
     });
 
     /*
-      Vérification de la bibliothèque OpenLIME
+      Vérification du chargement d’OpenLIME
     */
     if (typeof OpenLIME === "undefined") {
 
-      afficherErreur(
+      afficherMessage(
         "OpenLIME n’a pas été chargé. Vérifie la connexion Internet."
       );
 
@@ -353,24 +347,35 @@
       });
 
       if (!reponse.ok) {
-        throw new Error("Fichier info.json introuvable.");
+        throw new Error("info.json introuvable.");
       }
 
-      await reponse.json();
+      const donnees = await reponse.json();
+
+      /*
+        Vérification minimale de ton fichier HSH
+      */
+      if (donnees.type !== "hsh") {
+        throw new Error("Le fichier ne contient pas un RTI HSH.");
+      }
+
+      if (donnees.nplanes !== 12) {
+        throw new Error("Le fichier HSH doit contenir 12 plans.");
+      }
 
     } catch (erreur) {
 
       console.error(erreur);
 
-      afficherErreur(
-        "Impossible de trouver ../rti/dalle-01/info.json."
+      afficherMessage(
+        "Le fichier RTI HSH est introuvable ou incorrect. Vérifie ../rti/dalle-01/."
       );
 
       return;
     }
 
     /*
-      Initialisation du visualiseur OpenLIME
+      Initialisation OpenLIME pour un RTI HSH
     */
     try {
 
@@ -380,27 +385,42 @@
 
       const coucheRTI = new OpenLIME.Layer({
         type: "rti",
+
+        /*
+          Format HSH dans le format Relight
+        */
         url: cheminRTI,
-        layout: "deepzoom",
-        normals: true
+
+        /*
+          Important :
+          "image" pour les quatre JPG de coefficients.
+          Ne pas utiliser "deepzoom" ici.
+        */
+        layout: "image",
+
+        /*
+          Aucun normals.jpg n’est fourni.
+          Il faut donc désactiver normals.
+        */
+        normals: false
       });
 
       viewer.addLayer("rti", coucheRTI);
 
       /*
-        Masque le message après le lancement du viewer
+        Masque le message après l’initialisation
       */
       setTimeout(function () {
         cacherMessage();
       }, 1800);
 
       /*
-        Recentrage de la source lumineuse
+        Recentrage de la lumière
       */
       boutonLumiere.addEventListener("click", function () {
 
         if (typeof coucheRTI.setLight === "function") {
-          coucheRTI.setLight([0.5, 0.5], 500);
+          coucheRTI.setLight([0, 0], 500);
         }
 
       });
@@ -409,8 +429,8 @@
 
       console.error("Erreur OpenLIME :", erreur);
 
-      afficherErreur(
-        "Le visualiseur RTI n’a pas pu être initialisé. Vérifie les fichiers RTI."
+      afficherMessage(
+        "Le lecteur RTI HSH n’a pas pu être initialisé. Vérifie les quatre fichiers JPG."
       );
     }
 
