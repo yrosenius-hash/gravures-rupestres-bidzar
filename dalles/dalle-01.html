@@ -6,6 +6,52 @@
 <title>Dalle n°01 — CONUVAGRUB</title>
 <link rel="stylesheet" href="../style.css">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<style>
+  .embed-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #f4f0e8;
+    border: 1px solid rgba(43,39,36,0.14);
+    overflow: hidden;
+  }
+
+  .embed-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .media-frame {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(43,39,36,0.14);
+    display: block;
+  }
+
+  .download-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .full-btn {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    background: rgba(43,39,36,0.75);
+    color: var(--craie);
+    border: none;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
 
@@ -35,7 +81,10 @@
     <div class="section-inner">
       <p class="eyebrow">Photo de terrain</p>
       <a href="../dalle-01.jpg" target="_blank" rel="noopener" style="display:block; position:relative;">
-        <img src="../dalle-01.jpg" alt="Dalle gravée n°01, Bidzar — photo de terrain" style="width:100%; height:auto; border:1px solid rgba(43,39,36,0.14); display:block;">
+        <img
+          src="../dalle-01.jpg"
+          alt="Dalle gravée n°01, Bidzar — photo de terrain"
+          class="media-frame">
         <span class="meta-line" style="position:absolute; bottom:0.6rem; right:0.6rem; background:rgba(43,39,36,0.75); color:var(--craie); padding:0.3rem 0.6rem;">Agrandir ↗</span>
       </a>
     </div>
@@ -45,8 +94,21 @@
     <div class="section-inner">
       <p class="eyebrow">Modèle 3D — photogrammétrie</p>
       <div style="position:relative;">
-        <model-viewer id="mv-01" class="modele-3d" style="aspect-ratio:4/3;" src="../dalle-01.glb" alt="Dalle gravée n°01, Bidzar" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
-        <button onclick="document.getElementById('mv-01').requestFullscreen()" style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer;">Plein écran ⤢</button>
+        <model-viewer
+          id="mv-01"
+          class="modele-3d"
+          style="aspect-ratio:4/3; width:100%;"
+          src="../dalle-01.glb"
+          alt="Dalle gravée n°01, Bidzar"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1">
+        </model-viewer>
+        <button
+          onclick="document.getElementById('mv-01').requestFullscreen()"
+          class="full-btn">
+          Plein écran ⤢
+        </button>
       </div>
     </div>
   </section>
@@ -54,16 +116,32 @@
   <section class="section dalle">
     <div class="section-inner">
       <p class="eyebrow">Imagerie RTI</p>
-      <p class="lede">Deux fichiers disponibles selon le logiciel utilisé pour explorer le relief gravé sous différents angles de lumière.</p>
-      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem;">
-        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-01.rti" download>Télécharger le .rti (RTIViewer)</a>
-        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/rti-01.zip" download>Télécharger l'archive (RelightLab)</a>
+      <p class="lede">La visualisation RTI est intégrée directement dans la page pour une consultation immédiate, sans quitter le site.</p>
+
+      <div class="embed-wrap" style="margin-top:1.25rem;">
+        <iframe
+          id="thumb"
+          allowfullscreen
+          allow="fullscreen"
+          src="https://visual.ariadne-infrastructure.eu/rti/dalle-1?standalone"
+          title="Visualisation RTI de la dalle n°01">
+        </iframe>
       </div>
-      <p class="meta-line" style="margin-top:1rem;">RTIViewer et RelightLab sont gratuits (culturalheritageimaging.org / cnr-isti-vclab/relight).</p>
+
+      <div class="download-row">
+        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/dalle-01.rti" download>
+          Télécharger le .rti (RTIViewer)
+        </a>
+        <a class="bouton" href="https://github.com/yrosenius-hash/gravures-rupestres-bidzar/releases/download/rti-files/rti-01.zip" download>
+          Télécharger l'archive (RelightLab)
+        </a>
+      </div>
+
+      <p class="meta-line" style="margin-top:1rem;">
+        RTIViewer et RelightLab sont gratuits (culturalheritageimaging.org / cnr-isti-vclab/relight).
+      </p>
     </div>
   </section>
-
-
 
 </main>
 
