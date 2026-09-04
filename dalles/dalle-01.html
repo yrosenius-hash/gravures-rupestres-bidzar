@@ -1,123 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dalle n°01 — CONUVAGRUB</title>
-
-  <link rel="stylesheet" href="../style.css">
-
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <script src="https://unpkg.com/openlime@1.2.2/dist/js/openlime.min.js"></script>
-
-  <style>
-    * { box-sizing: border-box; }
-
-    model-viewer {
-      display: block;
-      width: 100%;
-      height: min(70vh, 720px);
-      min-height: 320px;
-      background: #eee;
-    }
-
-    .rti-wrapper {
-      position: relative;
-      width: 100%;
-      height: 600px;
-      min-height: 360px;
-      margin-top: 1.5rem;
-      overflow: hidden;
-      background: #111;
-      border: 1px solid rgba(43, 39, 36, 0.2);
-      isolation: isolate;
-    }
-
-    #visualiseur-rti {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .rti-message {
-      position: absolute;
-      inset: 0;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      color: #f1eadc;
-      background: #111;
-      font-family: sans-serif;
-      text-align: center;
-      pointer-events: none;
-    }
-
-    .rti-message[hidden] { display: none; }
-
-    .rti-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
-
-    .rti-actions button,
-    .rti-actions a {
-      border: 0;
-      padding: 0.6rem 0.85rem;
-      color: #f1eadc;
-      background: #2b2724;
-      font-family: inherit;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .rti-actions button:hover,
-    .rti-actions a:hover { opacity: 0.85; }
-
-    .fullscreen-button {
-      position: absolute;
-      right: 0.6rem;
-      bottom: 0.6rem;
-      z-index: 3;
-      border: 0;
-      padding: 0.5rem 0.75rem;
-      color: #f1eadc;
-      background: rgba(43, 39, 36, 0.85);
-      cursor: pointer;
-    }
-
-    .rti-wrapper:fullscreen {
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-      border: 0;
-    }
-
-    @media (max-width: 700px) {
-      .rti-wrapper {
-        height: 70vh;
-        min-height: 320px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalle n°01 — CONUVAGRUB</title>
+<link rel="stylesheet" href="../style.css">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
-
 <body>
 
 <header class="site-header">
   <div class="site-header-inner">
-    <a class="site-mark" href="../index.html">
-      CONUVAGRUB <span>· Bidzar</span>
-    </a>
-
+    <a class="site-mark" href="../index.html">CONUVAGRUB <span>· Bidzar</span></a>
     <nav class="site-nav">
       <a href="../index.html">Accueil</a>
-      <a href="../musee-virtuel.html">Musée virtuel</a>
+      <a href="../musee-virtuel.html" aria-current="page">Musée virtuel</a>
       <a href="../methodologie.html">Méthodologie numérique frugale</a>
       <a href="../contact.html">Contact &amp; enquête</a>
     </nav>
@@ -125,30 +22,21 @@
 </header>
 
 <main>
+
   <section class="section dalle dalle--auto">
     <div class="section-inner">
-      <p class="eyebrow">
-        <a href="../galerie.html" style="color: var(--ocre);">&larr; Galerie</a>
-      </p>
+      <p class="eyebrow"><a href="../galerie.html" style="color: var(--ocre);">&larr; Galerie</a></p>
       <h1>Dalle n°01</h1>
-      <p class="lede">
-        Fiche documentaire : photographie de terrain, modèle 3D par photogrammétrie et imagerie RTI.
-      </p>
+      <p class="lede">Fiche documentaire : photo de terrain, modèle 3D par photogrammétrie, imagerie RTI.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="section-inner">
       <p class="eyebrow">Photo de terrain</p>
-
       <a href="../dalle-01.jpg" target="_blank" rel="noopener" style="display:block; position:relative;">
-        <img src="../dalle-01.jpg"
-             alt="Dalle gravée n°01, Bidzar — photographie de terrain"
-             style="width:100%; height:auto; display:block; border:1px solid rgba(43,39,36,0.14);">
-        <span class="meta-line"
-              style="position:absolute; right:0.6rem; bottom:0.6rem; padding:0.3rem 0.6rem; color:var(--craie); background:rgba(43,39,36,0.75);">
-          Agrandir ↗
-        </span>
+        <img src="../dalle-01.jpg" alt="Dalle gravée n°01, Bidzar — photo de terrain" style="width:100%; height:auto; border:1px solid rgba(43,39,36,0.14); display:block;">
+        <span class="meta-line" style="position:absolute; bottom:0.6rem; right:0.6rem; background:rgba(43,39,36,0.75); color:var(--craie); padding:0.3rem 0.6rem;">Agrandir ↗</span>
       </a>
     </div>
   </section>
@@ -156,43 +44,25 @@
   <section class="section">
     <div class="section-inner">
       <p class="eyebrow">Modèle 3D — photogrammétrie</p>
-
       <div style="position:relative;">
-        <model-viewer id="modele-3d"
-                      src="../dalle-01.glb"
-                      alt="Modèle 3D de la dalle gravée n°01 de Bidzar"
-                      camera-controls
-                      auto-rotate
-                      shadow-intensity="1"
-                      exposure="1">
-        </model-viewer>
-
-        <button id="plein-ecran-3d" class="fullscreen-button" type="button">
-          Plein écran ⤢
-        </button>
+        <model-viewer id="mv-01" class="modele-3d" style="aspect-ratio:4/3;" src="../dalle-01.glb" alt="Dalle gravée n°01, Bidzar" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
+        <button onclick="document.getElementById('mv-01').requestFullscreen()" style="position:absolute; bottom:0.6rem; right:0.6rem; font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.03em; background:rgba(43,39,36,0.75); color:var(--craie); border:none; padding:0.4rem 0.7rem; cursor:pointer;">Plein écran ⤢</button>
       </div>
     </div>
   </section>
 
   <section class="section dalle">
     <div class="section-inner">
-      <p class="eyebrow">Imagerie RTI — HSH</p>
-      <p class="lede">
-        Déplace la souris sur l’image pour modifier la lumière.
-      </p>
-
-      <div id="rti-wrapper" class="rti-wrapper">
-        <div id="visualiseur-rti"></div>
-        <div id="rti-message" class="rti-message">Chargement de l’image RTI…</div>
-      </div>
-
-      <div class="rti-actions">
-        <button id="plein-ecran-rti" type="button">RTI plein écran ⤢</button>
-        <button id="recentrer-lumiere" type="button">Recentrer la lumière</button>
-        <a href="../rti/dalle-01/info.json" target="_blank" rel="noopener">Ouvrir info.json</a>
+      <p class="eyebrow">Imagerie RTI</p>
+      <p class="lede">Exploration interactive du relief gravé grâce à l’iframe Visual Media Service.</p>
+      <div style="position:relative; width:100%; height:600px; border:1px solid rgba(43,39,36,0.14);">
+        <iframe id="thumb" allowfullscreen allow="fullscreen"
+                style="position:absolute; top:0px; left:0px; width:100%; height:100%; border-width:0px"
+                src="http://visual.ariandne-infrastructure.eu/rti/dalle-1?standalone"></iframe>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer">
@@ -201,92 +71,6 @@
     <span><a href="../galerie.html" style="color:inherit;">&larr; Retour à la galerie</a></span>
   </div>
 </footer>
-
-<script>
-document.addEventListener("DOMContentLoaded", async function () {
-  const dossierRTI = "../rti/dalle-01/";
-  const fichierInfo = dossierRTI + "info.json";
-
-  const rtiWrapper = document.getElementById("rti-wrapper");
-  const rtiMessage = document.getElementById("rti-message");
-  const modele3D = document.getElementById("modele-3d");
-  const bouton3D = document.getElementById("plein-ecran-3d");
-  const boutonRTI = document.getElementById("plein-ecran-rti");
-  const boutonLumiere = document.getElementById("recentrer-lumiere");
-
-  function afficherMessage(message) {
-    rtiMessage.hidden = false;
-    rtiMessage.textContent = message;
-  }
-
-  function cacherMessage() {
-    rtiMessage.hidden = true;
-  }
-
-  bouton3D.addEventListener("click", function () {
-    if (modele3D.requestFullscreen) modele3D.requestFullscreen();
-  });
-
-  boutonRTI.addEventListener("click", function () {
-    if (rtiWrapper.requestFullscreen) rtiWrapper.requestFullscreen();
-  });
-
-  if (typeof OpenLIME === "undefined") {
-    afficherMessage("OpenLIME n’a pas été chargé.");
-    return;
-  }
-
-  try {
-    const reponse = await fetch(fichierInfo, { cache: "no-store" });
-    if (!reponse.ok) throw new Error("info.json introuvable.");
-
-    const donnees = await reponse.json();
-    if (donnees.type !== "hsh") throw new Error("type invalide.");
-    if (donnees.nplanes !== 12) throw new Error("nplanes invalide.");
-
-    const viewer = new OpenLIME.Viewer("#visualiseur-rti", {
-      background: "black"
-    });
-
-    const layer = new OpenLIME.Layer({
-      id: "rti-dalle-01",
-      type: "rti",
-      url: fichierInfo,
-      layout: "image",
-      normals: false
-    });
-
-    viewer.addLayer("rti", layer);
-
-    if (typeof OpenLIME.UIBasic === "function") {
-      new OpenLIME.UIBasic(viewer);
-    }
-
-    function resizeViewer() {
-      if (typeof viewer.resize === "function") viewer.resize();
-      if (viewer.canvas && typeof viewer.canvas.resize === "function") viewer.canvas.resize();
-      if (typeof viewer.draw === "function") viewer.draw();
-    }
-
-    const observer = new ResizeObserver(resizeViewer);
-    observer.observe(rtiWrapper);
-    window.addEventListener("resize", resizeViewer);
-    requestAnimationFrame(resizeViewer);
-
-    boutonLumiere.addEventListener("click", function () {
-      if (typeof layer.setLight === "function") {
-        layer.setLight([0.5, 0.5], 1000);
-      }
-      resizeViewer();
-    });
-
-    setTimeout(cacherMessage, 1500);
-  } catch (e) {
-    console.error(e);
-    afficherMessage("Le RTI n’a pas pu être chargé. Vérifie les fichiers et les chemins.");
-  }
-});
-</script>
 
 </body>
 </html>
