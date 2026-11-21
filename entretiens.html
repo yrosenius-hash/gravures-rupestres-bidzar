@@ -5,16 +5,116 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entretiens filmés — CONUVAGRUB</title>
 <link rel="stylesheet" href="style.css">
+
+<style>
+  .categories-entretiens {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .categorie-entretien {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 160px;
+    padding: 1.5rem 1rem;
+    border: 1px solid var(--basalte, #262626);
+    background: transparent;
+    color: var(--basalte, #262626);
+    font: inherit;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .categorie-entretien[aria-expanded="true"] {
+    background: var(--basalte, #262626);
+    color: var(--craie, #faf7ef);
+  }
+
+  .categorie-entretien:focus-visible {
+    outline: 3px solid var(--ocre, #b8823a);
+    outline-offset: 4px;
+  }
+
+  .categorie-entretien-titre {
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 1.3rem;
+  }
+
+  .categorie-entretien-compte {
+    font-size: 0.9rem;
+  }
+
+  .groupe-entretiens[hidden] {
+    display: none !important;
+  }
+
+  .groupe-entretiens h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .videos-entretiens {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .entretien-video {
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--basalte, #262626);
+  }
+
+  .entretien-video video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    object-fit: contain;
+  }
+
+  .entretien-video figcaption {
+    padding: 1rem;
+  }
+
+  .entretien-video h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 700px) {
+    .categories-entretiens,
+    .videos-entretiens {
+      grid-template-columns: 1fr;
+    }
+
+    .categorie-entretien {
+      min-height: 110px;
+    }
+  }
+</style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="site-header-inner">
-    <a class="site-mark" href="index.html">CONUVAGRUB <span>· Bidzar</span></a>
+    <a class="site-mark" href="index.html">
+      CONUVAGRUB <span>· Bidzar</span>
+    </a>
+
     <nav class="site-nav">
       <a href="index.html">Accueil</a>
-      <a href="musee-virtuel.html" aria-current="page">Musée virtuel</a>
-      <a href="methodologie.html">Méthodologie numérique frugale</a>
+      <a href="musee-virtuel.html" aria-current="page">
+        Musée virtuel
+      </a>
+      <a href="methodologie.html">
+        Méthodologie numérique frugale
+      </a>
       <a href="archive.html">Archives</a>
       <a href="contact.html">Contact &amp; enquête</a>
     </nav>
@@ -25,19 +125,262 @@
 
   <section class="section dalle dalle--auto">
     <div class="section-inner">
-      <p class="eyebrow"><a href="musee-virtuel.html" style="color: var(--ocre);">&larr; Musée virtuel</a></p>
+      <p class="eyebrow">
+        <a href="musee-virtuel.html" style="color: var(--ocre);">
+          &larr; Musée virtuel
+        </a>
+      </p>
+
       <h1>La mémoire du site, par ceux qui le côtoient</h1>
-      <p class="lede">Vidéos d'entretiens avec les riverains, les autorités traditionnelles et les chercheurs — à intégrer ici une fois montées.</p>
+
+      <p class="lede">
+        Découvrez les entretiens avec la population, les autorités
+        traditionnelles, les chercheurs et l’administration.
+        Choisissez une catégorie pour afficher les vidéos.
+      </p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" aria-label="Entretiens par catégorie">
     <div class="section-inner">
-      <div class="grid grid--3">
-        <div class="media-slot media-slot--large">Vidéo<br>Riverains</div>
-        <div class="media-slot media-slot--large">Vidéo<br>Autorités traditionnelles</div>
-        <div class="media-slot media-slot--large">Vidéo<br>Chercheurs</div>
+
+      <div class="categories-entretiens">
+
+        <button
+          class="categorie-entretien"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupe-notable"
+        >
+          <span class="categorie-entretien-titre">
+            Notable
+          </span>
+          <span class="categorie-entretien-compte">
+            1 vidéo
+          </span>
+        </button>
+
+        <button
+          class="categorie-entretien"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupe-population"
+        >
+          <span class="categorie-entretien-titre">
+            Population
+          </span>
+          <span class="categorie-entretien-compte">
+            2 vidéos
+          </span>
+        </button>
+
+        <button
+          class="categorie-entretien"
+          type="button"
+          aria-expanded="false"
+          aria-controls="groupe-chercheurs-administration"
+        >
+          <span class="categorie-entretien-titre">
+            Chercheurs et administration
+          </span>
+          <span class="categorie-entretien-compte">
+            2 vidéos
+          </span>
+        </button>
+
       </div>
+
+      <!-- NOTABLE -->
+
+      <section
+        class="groupe-entretiens"
+        id="groupe-notable"
+        aria-labelledby="titre-notable"
+        hidden
+      >
+        <h2 id="titre-notable">Notable</h2>
+
+        <div class="videos-entretiens">
+
+          <figure class="entretien-video">
+            <video
+              controls
+              playsinline
+              preload="none"
+              aria-label="Entretien avec le notable de Bidzar"
+            >
+              <source
+                src="videos/notable_bidzar.mp4"
+                type="video/mp4"
+              >
+              Votre navigateur ne permet pas de lire cette vidéo.
+              <a href="videos/notable_bidzar.mp4">
+                Télécharger la vidéo
+              </a>
+            </video>
+
+            <figcaption>
+              <h3>Entretien avec le notable de Bidzar</h3>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <!-- POPULATION -->
+
+      <section
+        class="groupe-entretiens"
+        id="groupe-population"
+        aria-labelledby="titre-population"
+        hidden
+      >
+        <h2 id="titre-population">Population</h2>
+
+        <div class="videos-entretiens">
+
+          <figure class="entretien-video">
+            <video
+              controls
+              playsinline
+              preload="none"
+              aria-label="Entretien avec Younoussa"
+            >
+              <source
+                src="videos/younoussa.mp4"
+                type="video/mp4"
+              >
+              Votre navigateur ne permet pas de lire cette vidéo.
+              <a href="videos/younoussa.mp4">
+                Télécharger la vidéo
+              </a>
+            </video>
+
+            <figcaption>
+              <h3>Entretien avec Younoussa</h3>
+            </figcaption>
+          </figure>
+
+          <figure class="entretien-video">
+            <video
+              controls
+              playsinline
+              preload="none"
+              aria-label="Entretien avec Araphat Amadou"
+            >
+              <source
+                src="videos/araphat_amadou.mp4"
+                type="video/mp4"
+              >
+              Votre navigateur ne permet pas de lire cette vidéo.
+              <a href="videos/araphat_amadou.mp4">
+                Télécharger la vidéo
+              </a>
+            </video>
+
+            <figcaption>
+              <h3>Entretien avec Araphat Amadou</h3>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <!-- CHERCHEURS ET ADMINISTRATION -->
+
+      <section
+        class="groupe-entretiens"
+        id="groupe-chercheurs-administration"
+        aria-labelledby="titre-chercheurs-administration"
+        hidden
+      >
+        <h2 id="titre-chercheurs-administration">
+          Chercheurs et administration
+        </h2>
+
+        <div class="videos-entretiens">
+
+          <figure class="entretien-video">
+            <video
+              controls
+              playsinline
+              preload="none"
+              aria-label="Entretien avec le Dr Babiné Zacharie"
+            >
+              <source
+                src="videos/dr_babine_zacharie.mp4"
+                type="video/mp4"
+              >
+              Votre navigateur ne permet pas de lire cette vidéo.
+              <a href="videos/dr_babine_zacharie.mp4">
+                Télécharger la vidéo
+              </a>
+            </video>
+
+            <figcaption>
+              <h3>Entretien avec le Dr Babiné Zacharie</h3>
+            </figcaption>
+          </figure>
+
+          <figure class="entretien-video">
+            <video
+              controls
+              playsinline
+              preload="none"
+              aria-label="Entretien avec Zra — MINAC"
+            >
+              <source
+                src="videos/zra_minac.mp4"
+                type="video/mp4"
+              >
+              Votre navigateur ne permet pas de lire cette vidéo.
+              <a href="videos/zra_minac.mp4">
+                Télécharger la vidéo
+              </a>
+            </video>
+
+            <figcaption>
+              <h3>Entretien avec Zra — MINAC</h3>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <noscript>
+        <p>
+          Activez JavaScript pour utiliser les catégories,
+          ou ouvrez directement les entretiens :
+        </p>
+        <ul>
+          <li>
+            <a href="videos/notable_bidzar.mp4">
+              Notable de Bidzar
+            </a>
+          </li>
+          <li>
+            <a href="videos/younoussa.mp4">
+              Younoussa
+            </a>
+          </li>
+          <li>
+            <a href="videos/araphat_amadou.mp4">
+              Araphat Amadou
+            </a>
+          </li>
+          <li>
+            <a href="videos/dr_babine_zacharie.mp4">
+              Dr Babiné Zacharie
+            </a>
+          </li>
+          <li>
+            <a href="videos/zra_minac.mp4">
+              Zra — MINAC
+            </a>
+          </li>
+        </ul>
+      </noscript>
+
     </div>
   </section>
 
@@ -46,9 +389,55 @@
 <footer class="site-footer">
   <div class="site-footer-inner">
     <span>CONUVAGRUB — Bidzar, Cameroun</span>
-    <span><a href="musee-virtuel.html" style="color:inherit;">&larr; Retour au musée virtuel</a></span>
+    <span>
+      <a href="musee-virtuel.html" style="color:inherit;">
+        &larr; Retour au musée virtuel
+      </a>
+    </span>
   </div>
 </footer>
+
+<script>
+  const boutons = document.querySelectorAll(".categorie-entretien");
+  const groupes = document.querySelectorAll(".groupe-entretiens");
+
+  boutons.forEach((bouton) => {
+    bouton.addEventListener("click", () => {
+      const cible = bouton.getAttribute("aria-controls");
+      const ouvrir = bouton.getAttribute("aria-expanded") !== "true";
+
+      boutons.forEach((autreBouton) => {
+        autreBouton.setAttribute("aria-expanded", "false");
+      });
+
+      groupes.forEach((groupe) => {
+        const afficher = ouvrir && groupe.id === cible;
+
+        if (!afficher) {
+          groupe.querySelectorAll("video").forEach((video) => {
+            video.pause();
+          });
+        }
+
+        groupe.hidden = !afficher;
+      });
+
+      bouton.setAttribute("aria-expanded", String(ouvrir));
+    });
+  });
+
+  const videos = document.querySelectorAll(".entretien-video video");
+
+  videos.forEach((video) => {
+    video.addEventListener("play", () => {
+      videos.forEach((autreVideo) => {
+        if (autreVideo !== video) {
+          autreVideo.pause();
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
